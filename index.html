@@ -144,6 +144,26 @@ nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
 .alt-bg{background:var(--surface-2)}
 .alt-bg .card{background:var(--surface)}
 
+/* features */
+.fx{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.fx-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px 26px 24px;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s}
+.fx-card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--green),#2ee59d);opacity:0;transition:opacity .2s}
+.fx-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--green)}
+.fx-card:hover::before{opacity:1}
+.fx-ic{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:var(--tile);box-shadow:0 0 0 1px rgba(46,229,157,.25),0 8px 20px rgba(12,21,18,.18);margin-bottom:18px}
+.fx-ic svg{width:26px;height:26px;fill:none;stroke:#2ee59d;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fx-card h3{font-size:1.25rem;margin-bottom:8px}
+.fx-card p{margin:0 0 16px;color:var(--muted);font-size:.98rem}
+.fx-tags{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
+.fx-tags li{font-size:.78rem;font-weight:600;color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-radius:99px;padding:3px 10px}
+.fx-tags li.pro{color:var(--green);border-color:var(--green)}
+.fx-tags li.pro::after{content:" PRO";font-size:.62rem;font-weight:800;letter-spacing:.06em;opacity:.8}
+.fx-key{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:24px 0 0;font-size:.92rem;color:var(--muted)}
+.pro-dot{width:12px;height:12px;border-radius:99px;border:1.5px solid var(--green)}
+@media (max-width:900px){.fx{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.fx{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.fx-card{transition:none}.fx-card:hover{transform:none}}
+
 /* editions */
 .ed{grid-template-columns:1fr 1fr;align-items:stretch}
 .ed .card{padding:28px}
@@ -272,20 +292,46 @@ footer a{color:var(--emerald)}
   <div class="wrap">
     <span class="eyebrow">Features</span>
     <h2 id="h-feat">Everything between the instance and the deploy</h2>
-    <div class="grid feat">
-      <div class="card"><h3>Extract from an instance</h3><p>Bring an Item's database objects in from an instance, and its application objects (concurrent programs, value sets, BI Publisher templates, workflow, OAF) as a script you run on the server or by letting Anvil run it for you over SSH.</p></div>
-      <div class="card"><h3>Look up application objects</h3><p>Find an application object in the database and fill in the application, language and territory its loader needs.</p></div>
-      <div class="card"><h3>Validate against your rules</h3><p>Check naming, prefixes and ownership for every Item before anything is deployed.</p></div>
-      <div class="card"><h3>Generate governed deploy scripts</h3><p>One script per target instance, with checksum, instance, backup and order checks built in, plus a matching restore script.</p></div>
-      <div class="card"><h3>Detect drift</h3><p>See whether an instance still matches the Item, with a side-by-side view of every difference. Compare two instances and get HTML or Excel reports (Pro).</p></div>
-      <div class="card"><h3>Refresh from an instance</h3><p>See exactly what would change, then update the Item's files from the instance (Pro).</p></div>
-      <div class="card"><h3>Inspect the instance</h3><p>Invalid objects and their compilation errors, what an object uses and what uses it, and whether an online patching cycle is open.</p></div>
-      <div class="card"><h3>Team rules before deploy</h3><p>A pre-deploy checklist for the content of your files: no hard-coded passwords, a ticket number in the header, and your own rules (Pro).</p></div>
-      <div class="card"><h3>Workspace Settings</h3><p>Folders and prefixes, the naming rule, the checklist and the deploy options in one place, shared by the whole team.</p></div>
-      <div class="card"><h3>Release packages</h3><p>Bundle several Items into one release that runs their deploy scripts in your order, with a suggested order and a change summary (Pro).</p></div>
-      <div class="card"><h3>Create items in bulk</h3><p>Turn custom programs, reports, value sets and lookups from an instance into Items, bring a schema's tables, views and packages into one Item, or pull in the custom objects a report uses (Pro).</p></div>
-      <div class="card"><h3>Search, Git and reports</h3><p>Search the whole workspace, commit it with local Git, and write a summary report of your work.</p></div>
+    <p class="lead">Six things Anvil does for every Item, all from one window.</p>
+    <div class="fx">
+      <article class="fx-card">
+        <span class="fx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span>
+        <h3>Extract</h3>
+        <p>Bring the real objects in from any instance, straight from your PC or on the server.</p>
+        <ul class="fx-tags"><li>Database</li><li>Concurrent programs</li><li>XML Publisher</li><li>Workflow</li><li>OAF</li></ul>
+      </article>
+      <article class="fx-card">
+        <span class="fx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>
+        <h3>Validate</h3>
+        <p>Catch naming, prefix and content problems before anything reaches an instance.</p>
+        <ul class="fx-tags"><li>Naming rules</li><li>Ownership</li><li class="pro">Checklist</li></ul>
+      </article>
+      <article class="fx-card">
+        <span class="fx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 13l-2 2 2 2M15 13l2 2-2 2"/></svg></span>
+        <h3>Generate</h3>
+        <p>Governed deploy and restore scripts for each target, ready for a person to read and run.</p>
+        <ul class="fx-tags"><li>Checksums</li><li>Backups</li><li>Right order</li></ul>
+      </article>
+      <article class="fx-card">
+        <span class="fx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4v16M17 4v16M3 8l4-4 4 4M13 16l4 4 4-4"/></svg></span>
+        <h3>Drift &amp; compare</h3>
+        <p>See whether an instance still matches, with every difference side by side.</p>
+        <ul class="fx-tags"><li>Drift</li><li class="pro">Compare instances</li><li class="pro">Refresh</li><li class="pro">HTML / Excel</li></ul>
+      </article>
+      <article class="fx-card">
+        <span class="fx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 8 12 3 3 8l9 5zM3 8v8l9 5 9-5V8M12 13v8"/></svg></span>
+        <h3>Release</h3>
+        <p>Bundle several Items into one release, in a suggested order, with a change summary.</p>
+        <ul class="fx-tags"><li class="pro">Release package</li><li class="pro">Dependencies</li><li class="pro">Git</li></ul>
+      </article>
+      <article class="fx-card">
+        <span class="fx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M17.5 14v7M14 17.5h7"/></svg></span>
+        <h3>Bulk &amp; inspect</h3>
+        <p>Create many Items at once and look inside the instance: invalid objects, errors, patching.</p>
+        <ul class="fx-tags"><li class="pro">Mass Items</li><li class="pro">Mass DB objects</li><li>Invalid objects</li></ul>
+      </article>
     </div>
+    <p class="fx-key"><span class="pro-dot" aria-hidden="true"></span>Marked features are in the Pro edition. <a href="#editions">Compare editions</a></p>
   </div>
 </section>
 
