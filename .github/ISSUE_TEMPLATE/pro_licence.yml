@@ -1,7 +1,7 @@
 name: Request a Pro licence
 description: Ask about a Pro licence key for your team.
 title: "Pro licence request: "
-labels: ["licence"]
+labels: ["Licence"]
 body:
   - type: markdown
     attributes:
