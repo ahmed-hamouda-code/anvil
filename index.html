@@ -78,27 +78,51 @@ section{padding:72px 0}
 /* header + hero (dark) */
 .dark{background:radial-gradient(900px 500px at 10% 0%,var(--dark-3) 0,var(--tile) 70%);color:var(--on-dark)}
 .dark a{color:var(--emerald)}
-header.site{position:sticky;top:0;z-index:10;background:rgba(12,21,18,.92);backdrop-filter:blur(8px);border-bottom:1px solid #1d3a32}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;flex-wrap:wrap;padding:6px 0}
-.brand{display:flex;align-items:center;gap:10px;color:var(--on-dark);font-weight:800;font-size:1.3rem;text-decoration:none}
-.brand:hover{color:var(--on-dark)}
-.brand svg{width:34px;height:34px;flex:none}
-nav ul{display:flex;gap:4px 18px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
-nav a{color:var(--on-dark-muted);text-decoration:none;font-weight:500;font-size:.95rem;padding:6px 2px}
-nav a:hover{color:var(--emerald)}
-.hero{padding:64px 0 80px}
-.hero-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center}
-.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;margin-bottom:18px}
-.hero p.lead{color:var(--on-dark-muted)}
+header.site{position:sticky;top:0;z-index:10;background:rgba(12,21,18,.97);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid rgba(46,229,157,.14)}
+.bar{display:flex;align-items:center;gap:20px;min-height:68px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--on-dark);font-weight:800;font-size:1.3rem;letter-spacing:-.02em;text-decoration:none;margin-right:auto}
+.dark .brand,.brand:hover{color:var(--on-dark)}
+.brand svg{width:36px;height:36px;flex:none;filter:drop-shadow(0 0 12px rgba(46,229,157,.35))}
+.ver{font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--emerald);border:1px solid rgba(46,229,157,.35);background:rgba(46,229,157,.08);border-radius:99px;padding:2px 8px}
+nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.dark nav a{display:block;color:var(--on-dark-muted);text-decoration:none;font-weight:500;font-size:.95rem;padding:8px 12px;border-radius:8px;transition:color .15s,background .15s}
+.dark nav a:hover{color:var(--on-dark);background:rgba(255,255,255,.06)}
+.dark a.nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--emerald);color:#06241a;font-weight:700;font-size:.95rem;text-decoration:none;border-radius:10px;padding:9px 16px;white-space:nowrap;transition:background .15s}
+.dark a.nav-cta:hover{background:#5cf0b6;color:#06241a}
+.nav-cta svg,.btn svg{width:18px;height:18px;flex:none}
+
+.hero{position:relative;overflow:hidden;padding:88px 0 112px}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(46,229,157,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(46,229,157,.06) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 0%,#000 30%,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 50% 0%,#000 30%,transparent 75%);pointer-events:none}
+.hero::after{content:"";position:absolute;width:640px;height:640px;right:-160px;top:40px;background:radial-gradient(circle,rgba(46,229,157,.22),transparent 65%);pointer-events:none}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:10px;font-size:.88rem;color:var(--on-dark);text-decoration:none;border:1px solid rgba(46,229,157,.3);background:rgba(46,229,157,.07);border-radius:99px;padding:5px 14px 5px 5px;margin-bottom:24px}
+.dark a.pill{color:var(--on-dark)}
+.dark a.pill:hover{border-color:var(--emerald);color:var(--on-dark)}
+.pill b{background:var(--emerald);color:#06241a;border-radius:99px;padding:2px 9px;font-size:.75rem;letter-spacing:.04em}
+.kicker{display:block;font-size:.95rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--emerald);margin-bottom:14px}
+.hero h1{font-size:clamp(2.3rem,5.6vw,3.9rem);font-weight:800;letter-spacing:-.035em;line-height:1.06;margin-bottom:22px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#2ee59d,#9ff5d2);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{color:var(--on-dark-muted);font-size:1.12rem;max-width:540px}
+.ctas{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:30px 0 22px}
+.btn.big{display:inline-flex;align-items:center;gap:10px;font-size:1.15rem;padding:17px 28px}
+.dark a.btn.ghost{background:transparent;box-shadow:none;display:inline-flex;align-items:center;gap:8px;color:var(--on-dark)!important;text-decoration:none;font-weight:600;font-size:1.05rem;border:1px solid rgba(232,245,239,.25);border-radius:12px;padding:16px 22px;transition:border-color .15s,background .15s}
+.dark a.btn.ghost:hover{border-color:var(--emerald);background:rgba(46,229,157,.06)}
+.chips{display:flex;flex-wrap:wrap;gap:8px 18px;list-style:none;margin:0;padding:0;font-size:.9rem;color:var(--on-dark-muted)}
+.chips li{display:flex;align-items:center;gap:7px}
+.chips li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--emerald)}
+.win{position:relative;border-radius:14px;overflow:hidden;background:#fff;border:1px solid rgba(46,229,157,.25);box-shadow:0 0 0 6px rgba(46,229,157,.05),0 40px 80px rgba(0,0,0,.6);transform:perspective(1600px) rotateY(-6deg) rotateX(2deg);transition:transform .4s}
+.win:hover{transform:none}
+.win-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#16302a;color:var(--on-dark-muted);font-size:.78rem}
+.win-bar i{width:11px;height:11px;border-radius:50%;background:#3b5a51}
+.win-bar i:first-child{background:var(--emerald)}
+.win-bar span{margin-left:8px}
+.win img{display:block;width:100%}
 .btn{display:inline-block;background:var(--emerald);color:#06241a!important;font-weight:700;text-decoration:none;border-radius:12px;padding:15px 28px;font-size:1.1rem;box-shadow:0 6px 24px rgba(46,229,157,.25);transition:transform .15s,background .15s}
 .btn:hover{background:#5cf0b6;transform:translateY(-1px)}
 .btn.big{font-size:1.25rem;padding:18px 34px}
 .btn.alt{background:transparent;color:var(--green)!important;border:2px solid var(--green);box-shadow:none}
 .btn.alt:hover{background:var(--surface-2);transform:none}
 .small{font-size:.9rem;color:var(--on-dark-muted);margin-top:12px}
-.hero .secondary{display:inline-block;margin-top:10px;font-size:.95rem}
-.shot-frame{border-radius:12px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.55);border:1px solid #27493f;background:#fff}
-.shot-frame img{display:block;width:100%}
 
 /* promises */
 .promises{padding:0;margin-top:-36px;position:relative;z-index:2}
@@ -156,7 +180,9 @@ footer .row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 footer a{color:var(--emerald)}
 
 @media (max-width:900px){
-  .hero-grid{grid-template-columns:1fr;gap:32px}
+  .hero-grid{grid-template-columns:1fr;gap:48px}
+  .win{transform:none}
+  nav{display:none}
   .steps,.feat{grid-template-columns:1fr 1fr}
   .promise-grid,.ed,.dl-grid{grid-template-columns:1fr}
 }
@@ -164,8 +190,10 @@ footer a{color:var(--emerald)}
   section{padding:52px 0}
   .steps,.feat,.gallery{grid-template-columns:1fr}
   .btn,.btn.big{display:block;text-align:center}
-  .hero{padding:40px 0 64px}
-  .bar{justify-content:center}
+  .hero{padding:48px 0 80px}
+  .ctas .btn,.dark a.btn.ghost{display:flex;justify-content:center;width:100%}
+  .nav-cta .lbl{display:none}
+  .ver{display:none}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
 </style>
@@ -176,16 +204,17 @@ footer a{color:var(--emerald)}
   <div class="wrap bar">
     <a class="brand" href="#top" aria-label="Anvil, back to the top">
       <svg viewBox="0 0 32 32" aria-hidden="true"><rect x=".5" y=".5" width="31" height="31" rx="8" fill="#0c1512" stroke="#2ee59d" stroke-opacity=".35"/><g fill="#2ee59d"><path d="M10.5 8.5h18v7h-18C7 15.5 4.2 13.6 2.6 11.4 5 10 7.8 8.5 10.5 8.5z"/><path d="M13 15.3h12l-2.4 6h-7.2z"/><path d="M11 21h16l2.5 5.5h-21z"/></g></svg>
-      Anvil
+      Anvil <span class="ver">v1.1</span>
     </a>
     <nav aria-label="Main">
       <ul>
+        <li><a href="#how">How it works</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#editions">Editions</a></li>
         <li><a href="#screenshots">Screenshots</a></li>
-        <li><a href="#download">Download</a></li>
       </ul>
     </nav>
+    <a class="nav-cta" href="#download" aria-label="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg><span class="lbl">Download</span></a>
   </div>
 </header>
 
@@ -193,13 +222,23 @@ footer a{color:var(--emerald)}
 <section class="hero dark" aria-labelledby="h-hero">
   <div class="wrap hero-grid">
     <div>
-      <h1 id="h-hero">From instance to verified deploy: your Oracle EBS custom code, under control.</h1>
-      <p class="lead">Anvil is a Windows program that keeps Oracle E-Business Suite R12.2 custom code in order. You describe what you build, bring the real objects in from an instance, check them against your team's rules, generate the scripts that deploy them, and see whether an instance still matches what you have.</p>
-      <p><a class="btn big" href="https://github.com/ahmed-hamouda-code/anvil/releases/latest/download/Anvil-windows-x64.zip">Download for Windows</a></p>
-      <p class="small">Version 1.1.0 · Windows 10/11 · 64-bit · free Standard edition</p>
-      <a class="secondary" href="https://github.com/ahmed-hamouda-code/anvil/releases">All versions and release notes</a>
+      <a class="pill" href="#news"><b>NEW</b> Version 1.1: Workspace Settings, new themes and more &rarr;</a>
+      <span class="kicker">From instance to verified deploy</span>
+      <h1 id="h-hero">Your Oracle EBS custom code, <em>under control.</em></h1>
+      <p class="lead">Describe what you build, bring the real objects in from an instance, check them against your team's rules and generate the scripts that deploy them. Anvil then tells you whether an instance still matches.</p>
+      <div class="ctas">
+        <a class="btn big" href="https://github.com/ahmed-hamouda-code/anvil/releases/latest/download/Anvil-windows-x64.zip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg>Download for Windows</a>
+        <a class="btn ghost" href="#how">See how it works</a>
+      </div>
+      <ul class="chips" aria-label="Download details">
+        <li>Free Standard edition</li>
+        <li>Windows 10/11, 64-bit</li>
+        <li>Oracle EBS R12.2</li>
+        <li><a href="https://github.com/ahmed-hamouda-code/anvil/releases">All versions</a></li>
+      </ul>
     </div>
-    <div class="shot-frame">
+    <div class="win">
+      <div class="win-bar" aria-hidden="true"><i></i><i></i><i></i><span>Anvil · Acme-EBS-Custom</span></div>
       <img src="assets/guide-window.png" width="1920" height="1140" alt="The Anvil window: a workspace tree of folders and items on the left, and an overview showing how many items are ready to deploy on the right">
     </div>
   </div>
