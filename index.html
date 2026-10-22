@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anvil — Oracle EBS custom code, under control</title>
+<meta name="description" content="Anvil is a Windows program that keeps Oracle E-Business Suite R12.2 custom code in order: bring objects in from an instance, check them against your rules, generate deploy scripts and see whether an instance still matches. Free Standard edition.">
+<meta name="theme-color" content="#0c1512">
+<link rel="canonical" href="https://ahmed-hamouda-code.github.io/anvil/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ahmed-hamouda-code.github.io/anvil/">
+<meta property="og:title" content="Anvil — Oracle EBS custom code, under control">
+<meta property="og:description" content="From instance to verified deploy. A Windows program for Oracle E-Business Suite R12.2 custom code. Free Standard edition.">
+<meta property="og:image" content="https://ahmed-hamouda-code.github.io/anvil/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Anvil logo and the Anvil window showing a workspace of items ready for checking">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Anvil — Oracle EBS custom code, under control">
+<meta name="twitter:description" content="From instance to verified deploy. A Windows program for Oracle E-Business Suite R12.2 custom code. Free Standard edition.">
+<meta name="twitter:image" content="https://ahmed-hamouda-code.github.io/anvil/assets/og-card.png">
+<meta name="twitter:image:alt" content="Anvil logo and the Anvil window showing a workspace of items ready for checking">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --tile:#0c1512;
+  --dark-2:#10201b;
+  --dark-3:#16302a;
+  --emerald:#2ee59d;
+  --on-dark:#e8f5ef;
+  --on-dark-muted:#a9c4b8;
+  --bg:#f4faf7;
+  --surface:#ffffff;
+  --surface-2:#e9f5ef;
+  --text:#0f2a21;
+  --muted:#46615a;
+  --green:#0b7a52;
+  --green-strong:#086241;
+  --border:#cfe3d9;
+  --shadow:0 8px 30px rgba(12,21,18,.10);
+  --radius:16px;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0e1815;
+    --surface:#14231e;
+    --surface-2:#192c26;
+    --text:#e6f2ec;
+    --muted:#a3bdb2;
+    --green:#2ee59d;
+    --green-strong:#5cf0b6;
+    --border:#25403a;
+    --shadow:0 8px 30px rgba(0,0,0,.4);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;line-height:1.6;font-size:17px;-webkit-text-size-adjust:100%}
+img,video,svg{max-width:100%;height:auto}
+a{color:var(--green);text-underline-offset:3px}
+a:hover{color:var(--green-strong)}
+:focus-visible{outline:3px solid var(--emerald);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+h1,h2,h3{line-height:1.2;margin:0;letter-spacing:-.02em}
+h2{font-size:clamp(1.7rem,4vw,2.3rem);margin-bottom:12px}
+h3{font-size:1.1rem}
+p{margin:0 0 1em}
+section{padding:72px 0}
+.lead{font-size:1.15rem;color:var(--muted);max-width:720px}
+.eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+
+/* header + hero (dark) */
+.dark{background:radial-gradient(900px 500px at 10% 0%,var(--dark-3) 0,var(--tile) 70%);color:var(--on-dark)}
+.dark a{color:var(--emerald)}
+header.site{position:sticky;top:0;z-index:10;background:rgba(12,21,18,.92);backdrop-filter:blur(8px);border-bottom:1px solid #1d3a32}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;flex-wrap:wrap;padding:6px 0}
+.brand{display:flex;align-items:center;gap:10px;color:var(--on-dark);font-weight:800;font-size:1.3rem;text-decoration:none}
+.brand:hover{color:var(--on-dark)}
+.brand svg{width:34px;height:34px;flex:none}
+nav ul{display:flex;gap:4px 18px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+nav a{color:var(--on-dark-muted);text-decoration:none;font-weight:500;font-size:.95rem;padding:6px 2px}
+nav a:hover{color:var(--emerald)}
+.hero{padding:64px 0 80px}
+.hero-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;margin-bottom:18px}
+.hero p.lead{color:var(--on-dark-muted)}
+.btn{display:inline-block;background:var(--emerald);color:#06241a!important;font-weight:700;text-decoration:none;border-radius:12px;padding:15px 28px;font-size:1.1rem;box-shadow:0 6px 24px rgba(46,229,157,.25);transition:transform .15s,background .15s}
+.btn:hover{background:#5cf0b6;transform:translateY(-1px)}
+.btn.big{font-size:1.25rem;padding:18px 34px}
+.btn.alt{background:transparent;color:var(--green)!important;border:2px solid var(--green);box-shadow:none}
+.btn.alt:hover{background:var(--surface-2);transform:none}
+.small{font-size:.9rem;color:var(--on-dark-muted);margin-top:12px}
+.hero .secondary{display:inline-block;margin-top:10px;font-size:.95rem}
+.shot-frame{border-radius:12px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.55);border:1px solid #27493f;background:#fff}
+.shot-frame img{display:block;width:100%}
+
+/* promises */
+.promises{padding:0;margin-top:-36px;position:relative;z-index:2}
+.promise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.promise{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.promise .tick{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--green);color:#fff;font-weight:800;margin-bottom:10px}
+@media (prefers-color-scheme:dark){.promise .tick{color:#06241a}}
+.promise h3{margin-bottom:6px}
+.promise p{margin:0;color:var(--muted);font-size:.97rem}
+
+/* cards */
+.grid{display:grid;gap:18px;margin-top:32px}
+.steps{grid-template-columns:repeat(3,1fr);counter-reset:s}
+.feat{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px}
+.card h3{margin-bottom:6px}
+.card p{margin:0;color:var(--muted);font-size:.97rem}
+.step::before{counter-increment:s;content:counter(s);display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--tile);color:var(--emerald);font-weight:800;margin-bottom:12px}
+.alt-bg{background:var(--surface-2)}
+.alt-bg .card{background:var(--surface)}
+
+/* editions */
+.ed{grid-template-columns:1fr 1fr;align-items:stretch}
+.ed .card{padding:28px}
+.ed .pro{border:2px solid var(--green)}
+.tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:99px;padding:3px 10px;background:var(--surface-2);color:var(--green);margin-bottom:8px}
+.ed ul{margin:14px 0 20px;padding-left:20px;color:var(--muted);font-size:.97rem}
+.ed li{margin:4px 0}
+.price{font-size:1.6rem;font-weight:800;margin:4px 0 8px}
+.note{font-size:.92rem;color:var(--muted);margin-top:22px}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:32px}
+figure{margin:0}
+figure a{display:block;border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);background:var(--surface)}
+figure img{display:block;width:100%;height:auto}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:10px}
+figure.wide{grid-column:1/-1}
+video{display:block;width:100%;border-radius:14px;background:#000;box-shadow:var(--shadow);margin-top:28px}
+
+/* news + download */
+.news{margin:24px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+.news li{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--green);border-radius:10px;padding:14px 18px;color:var(--muted)}
+.news strong{color:var(--text)}
+.dl-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;margin-top:28px}
+.dl-grid h3{margin-bottom:10px}
+.dl-grid ul{padding-left:20px;margin:0}
+.dl-grid li{margin:6px 0;color:var(--muted)}
+.warn{border-left:4px solid #d9a400}
+.dark .card{color:var(--text)}
+.dark .card a{color:var(--green)}
+
+footer{background:var(--tile);color:var(--on-dark-muted);padding:32px 0;font-size:.95rem}
+footer .row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:var(--emerald)}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:32px}
+  .steps,.feat{grid-template-columns:1fr 1fr}
+  .promise-grid,.ed,.dl-grid{grid-template-columns:1fr}
+}
+@media (max-width:620px){
+  section{padding:52px 0}
+  .steps,.feat,.gallery{grid-template-columns:1fr}
+  .btn,.btn.big{display:block;text-align:center}
+  .hero{padding:40px 0 64px}
+  .bar{justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="site dark">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Anvil, back to the top">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x=".5" y=".5" width="31" height="31" rx="8" fill="#0c1512" stroke="#2ee59d" stroke-opacity=".35"/><g fill="#2ee59d"><path d="M10.5 8.5h18v7h-18C7 15.5 4.2 13.6 2.6 11.4 5 10 7.8 8.5 10.5 8.5z"/><path d="M13 15.3h12l-2.4 6h-7.2z"/><path d="M11 21h16l2.5 5.5h-21z"/></g></svg>
+      Anvil
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#editions">Editions</a></li>
+        <li><a href="#screenshots">Screenshots</a></li>
+        <li><a href="#download">Download</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero dark" aria-labelledby="h-hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1 id="h-hero">From instance to verified deploy: your Oracle EBS custom code, under control.</h1>
+      <p class="lead">Anvil is a Windows program that keeps Oracle E-Business Suite R12.2 custom code in order. You describe what you build, bring the real objects in from an instance, check them against your team's rules, generate the scripts that deploy them, and see whether an instance still matches what you have.</p>
+      <p><a class="btn big" href="https://github.com/ahmed-hamouda-code/anvil/releases/latest/download/Anvil-windows-x64.zip">Download for Windows</a></p>
+      <p class="small">Version 1.1.0 · Windows 10/11 · 64-bit · free Standard edition</p>
+      <a class="secondary" href="https://github.com/ahmed-hamouda-code/anvil/releases">All versions and release notes</a>
+    </div>
+    <div class="shot-frame">
+      <img src="assets/guide-window.png" width="1920" height="1140" alt="The Anvil window: a workspace tree of folders and items on the left, and an overview showing how many items are ready to deploy on the right">
+    </div>
+  </div>
+</section>
+
+<section class="promises" aria-label="Three promises">
+  <div class="wrap promise-grid">
+    <div class="promise"><span class="tick" aria-hidden="true">&#10003;</span><h3>Prepares and checks</h3><p>Anvil never runs a deploy for you. It writes the script; a person reads it and runs it.</p></div>
+    <div class="promise"><span class="tick" aria-hidden="true">&#10003;</span><h3>Read-only on the server</h3><p>The only thing it runs on the apps server is the read-only extract it generates, and only when you ask.</p></div>
+    <div class="promise"><span class="tick" aria-hidden="true">&#10003;</span><h3>Passwords stay off disk</h3><p>Passwords live in Windows Credential Manager and are never written to a file.</p></div>
+  </div>
+</section>
+
+<section id="how" aria-labelledby="h-how">
+  <div class="wrap">
+    <span class="eyebrow">How it works</span>
+    <h2 id="h-how">Your first day, from an empty folder to a checked deploy</h2>
+    <p class="lead">Six steps, all inside the window.</p>
+    <div class="grid steps">
+      <div class="card step"><h3>Workspace</h3><p>Make a workspace on your PC, then add a Folder for each functional area. It holds your work and your team's naming and checklist rules.</p></div>
+      <div class="card step"><h3>Instances</h3><p>Add your instances once and test the connection. The password is kept in Windows Credential Manager.</p></div>
+      <div class="card step"><h3>Item</h3><p>Create an Item for each deliverable (a report, a package, an interface) and list its objects in the item editor.</p></div>
+      <div class="card step"><h3>Extract</h3><p>Bring the real objects in from the instance into the Item, straight from your PC or from the apps server.</p></div>
+      <div class="card step"><h3>Validate &amp; Drift</h3><p>Check the Item against your team's rules, and see whether an instance still matches what you have.</p></div>
+      <div class="card step"><h3>Deploy &amp; verify</h3><p>Generate the deploy script, run it on the apps server, then register its log and let Anvil check the result.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="alt-bg" aria-labelledby="h-feat">
+  <div class="wrap">
+    <span class="eyebrow">Features</span>
+    <h2 id="h-feat">Everything between the instance and the deploy</h2>
+    <div class="grid feat">
+      <div class="card"><h3>Extract from an instance</h3><p>Bring an Item's database objects in from an instance, and its application objects (concurrent programs, value sets, BI Publisher templates, workflow, OAF) as a script you run on the server or by letting Anvil run it for you over SSH.</p></div>
+      <div class="card"><h3>Look up application objects</h3><p>Find an application object in the database and fill in the application, language and territory its loader needs.</p></div>
+      <div class="card"><h3>Validate against your rules</h3><p>Check naming, prefixes and ownership for every Item before anything is deployed.</p></div>
+      <div class="card"><h3>Generate governed deploy scripts</h3><p>One script per target instance, with checksum, instance, backup and order checks built in, plus a matching restore script.</p></div>
+      <div class="card"><h3>Detect drift</h3><p>See whether an instance still matches the Item, with a side-by-side view of every difference. Compare two instances and get HTML or Excel reports (Pro).</p></div>
+      <div class="card"><h3>Refresh from an instance</h3><p>See exactly what would change, then update the Item's files from the instance (Pro).</p></div>
+      <div class="card"><h3>Inspect the instance</h3><p>Invalid objects and their compilation errors, what an object uses and what uses it, and whether an online patching cycle is open.</p></div>
+      <div class="card"><h3>Team rules before deploy</h3><p>A pre-deploy checklist for the content of your files: no hard-coded passwords, a ticket number in the header, and your own rules (Pro).</p></div>
+      <div class="card"><h3>Workspace Settings</h3><p>Folders and prefixes, the naming rule, the checklist and the deploy options in one place, shared by the whole team.</p></div>
+      <div class="card"><h3>Release packages</h3><p>Bundle several Items into one release that runs their deploy scripts in your order, with a suggested order and a change summary (Pro).</p></div>
+      <div class="card"><h3>Create items in bulk</h3><p>Turn custom programs, reports, value sets and lookups from an instance into Items, bring a schema's tables, views and packages into one Item, or pull in the custom objects a report uses (Pro).</p></div>
+      <div class="card"><h3>Search, Git and reports</h3><p>Search the whole workspace, commit it with local Git, and write a summary report of your work.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="editions" aria-labelledby="h-ed">
+  <div class="wrap">
+    <span class="eyebrow">Editions</span>
+    <h2 id="h-ed">One program, two editions</h2>
+    <p class="lead">Without a licence key Anvil is the Standard edition. A signed licence key switches on Pro.</p>
+    <div class="grid ed">
+      <div class="card">
+        <span class="tag">Standard</span>
+        <div class="price">Free</div>
+        <p>Everything you need to bring one Item from instance to a checked deploy.</p>
+        <ul>
+          <li>Workspace, Folders, Items and the item editor</li>
+          <li>Instances and the credential store</li>
+          <li>Extract database objects, and run the extract over SSH</li>
+          <li>Validate against naming and prefix rules</li>
+          <li>Generate a deploy script for one Item and register its log</li>
+          <li>Drift of one Item against one instance, on screen</li>
+          <li>Invalid objects, patching cycle check and Search</li>
+          <li>Overview, Problems, side-by-side Differences and the command palette</li>
+        </ul>
+        <a class="btn alt" href="#download">Download Standard</a>
+      </div>
+      <div class="card pro">
+        <span class="tag">Pro</span>
+        <div class="price">Licence key</div>
+        <p>Everything in Standard, plus the features for teams and releases.</p>
+        <ul>
+          <li>Mass Items</li>
+          <li>Mass DB objects</li>
+          <li>Objects used by reports</li>
+          <li>Release package</li>
+          <li>Compare instances</li>
+          <li>Refresh from instance</li>
+          <li>Pre-deploy checklist</li>
+          <li>Verify queries</li>
+          <li>Dependencies</li>
+          <li>Your own item templates</li>
+          <li>Git</li>
+          <li>Drift reports (HTML, Excel)</li>
+          <li>Summary report</li>
+          <li>Settings backup and restore</li>
+        </ul>
+        <!-- Placeholder contact: opens a GitHub issue. Swap this link for an email or LinkedIn address when ready. -->
+        <a class="btn" href="https://github.com/ahmed-hamouda-code/anvil/issues/new?title=Pro%20licence%20request">Get Pro</a>
+      </div>
+    </div>
+    <p class="note">The licence key is checked on your PC against a public key built into the program. The check is offline and nothing is sent anywhere.</p>
+  </div>
+</section>
+
+<section id="screenshots" class="alt-bg" aria-labelledby="h-shots">
+  <div class="wrap">
+    <span class="eyebrow">Screenshots</span>
+    <h2 id="h-shots">See it at work</h2>
+    <p class="lead">All screenshots use demo data. Click one to open it full size.</p>
+    <div class="gallery">
+      <figure class="wide">
+        <a href="assets/guide-window.png" target="_blank" rel="noopener"><img src="assets/guide-window.png" width="1920" height="1140" loading="lazy" alt="The main window: workspace tree, toolbar and the Overview tab with the ready-to-deploy count"></a>
+        <figcaption>The main window: your folders and items on the left, and an Overview of what is ready to deploy.</figcaption>
+      </figure>
+      <figure>
+        <a href="assets/guide-instances.png" target="_blank" rel="noopener"><img src="assets/guide-instances.png" width="1650" height="1020" loading="lazy" alt="The Instances window with the list of instances and their connection settings"></a>
+        <figcaption>Instances: define a database and apps server once, test the connection, share it across workspaces.</figcaption>
+      </figure>
+      <figure>
+        <a href="assets/guide-item-editor.png" target="_blank" rel="noopener"><img src="assets/guide-item-editor.png" width="1500" height="930" loading="lazy" alt="The item editor listing a report Item's objects: packages, views, a table and a function"></a>
+        <figcaption>The item editor: every object an Item holds, with the state of its file.</figcaption>
+      </figure>
+      <figure>
+        <a href="assets/guide-mass-items.png" target="_blank" rel="noopener"><img src="assets/guide-mass-items.png" width="1500" height="960" loading="lazy" alt="The Mass Items window with its three steps: Find, Pick and Create"></a>
+        <figcaption>Mass Items (Pro): find programs on an instance, tick the ones you want and create Items in one go.</figcaption>
+      </figure>
+      <figure>
+        <a href="assets/guide-release.png" target="_blank" rel="noopener"><img src="assets/guide-release.png" width="1350" height="960" loading="lazy" alt="The Release package window for bundling Items into one release"></a>
+        <figcaption>Release package (Pro): bundle several Items into one release that runs in your order.</figcaption>
+      </figure>
+    </div>
+    <h3 style="margin-top:48px">Watch the tour</h3>
+    <video controls preload="none" poster="assets/guide-window.png" width="1920" height="1080">
+      <source src="assets/Anvil-promo.mp4" type="video/mp4">
+      Your browser does not play this video. <a href="assets/Anvil-promo.mp4">Download the video</a>.
+    </video>
+  </div>
+</section>
+
+<section id="news" aria-labelledby="h-new">
+  <div class="wrap">
+    <span class="eyebrow">What's new</span>
+    <h2 id="h-new">What's new in 1.1</h2>
+    <ul class="news">
+      <li><strong>Workspace Settings.</strong> One window for everything your team shares: Folders, naming, the checklist and, new in this version, the deploy options.</li>
+      <li><strong>Splash screen.</strong> Anvil now opens with a splash screen showing the version and edition. You can turn it off in Settings.</li>
+      <li><strong>Anvil themes.</strong> Two new looks in Anvil's own greens, one dark and one light. The light one is now the default.</li>
+      <li><strong>Objects used by reports (Pro).</strong> For a report Item, Anvil reads its queries and data templates, finds the custom objects they use on the instance and lists them so you can add them to the Item.</li>
+      <li><strong>Clearer messages.</strong> Message banners and field marks in every task window show what needs your attention.</li>
+    </ul>
+    <p class="note"><a href="https://github.com/ahmed-hamouda-code/anvil/releases">Read the full release notes</a></p>
+  </div>
+</section>
+
+<section id="download" class="dark" aria-labelledby="h-dl">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--emerald)">Download</span>
+    <h2 id="h-dl">Get Anvil for Windows</h2>
+    <p class="lead" style="color:var(--on-dark-muted)">The Standard edition is free. A Pro licence key switches on the Pro features.</p>
+    <p><a class="btn big" href="https://github.com/ahmed-hamouda-code/anvil/releases/latest/download/Anvil-windows-x64.zip">Download for Windows</a></p>
+    <p class="small">Version 1.1.0 · Windows 10/11 · 64-bit · free Standard edition · <a href="https://github.com/ahmed-hamouda-code/anvil/releases">All versions and release notes</a></p>
+    <div class="dl-grid">
+      <div class="card">
+        <h3>Requirements</h3>
+        <ul>
+          <li>Windows 10 or 11, 64-bit.</li>
+          <li>Network access from your PC to the database.</li>
+          <li>For a database that enforces Native Network Encryption: Oracle Instant Client, 64-bit.</li>
+          <li>Optional: Git on your PC, for commits and the Git label.</li>
+          <li>Optional: an SSH login to the apps server, to run Extract on the server.</li>
+        </ul>
+      </div>
+      <div class="card warn">
+        <h3>First run</h3>
+        <p>The program is not code-signed yet, so Windows SmartScreen may show "Windows protected your PC". Click <strong>More info</strong>, then <strong>Run anyway</strong>. Checksums are in the zip and in the release notes, so you can check the download first.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <span>&copy; 2026 Anvil</span>
+    <span><a href="https://github.com/ahmed-hamouda-code/anvil/releases">Releases</a> · <a href="https://github.com/ahmed-hamouda-code/anvil">Repository</a></span>
+  </div>
+</footer>
+</body>
+</html>
