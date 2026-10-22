@@ -164,6 +164,16 @@ nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
 @media (max-width:620px){.fx{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.fx-card{transition:none}.fx-card:hover{transform:none}}
 
+/* support */
+.sup{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
+.sup-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px 26px 24px;color:var(--text);text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s}
+.sup-card:hover{color:var(--text);transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--green)}
+.sup-card h3{font-size:1.2rem;margin-bottom:8px}
+.sup-card p{margin:0 0 18px;color:var(--muted);font-size:.97rem;flex:1}
+.sup-go{font-weight:700;color:var(--green)}
+@media (max-width:900px){.sup{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.sup-card{transition:none}.sup-card:hover{transform:none}}
+
 /* editions */
 .ed{grid-template-columns:1fr 1fr;align-items:stretch}
 .ed .card{padding:28px}
@@ -232,6 +242,7 @@ footer a{color:var(--emerald)}
         <li><a href="#features">Features</a></li>
         <li><a href="#editions">Editions</a></li>
         <li><a href="#screenshots">Screenshots</a></li>
+        <li><a href="#support">Support</a></li>
       </ul>
     </nav>
     <a class="nav-cta" href="#download" aria-label="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg><span class="lbl">Download</span></a>
@@ -378,7 +389,7 @@ footer a{color:var(--emerald)}
           <li>Settings backup and restore</li>
         </ul>
         <!-- Placeholder contact: opens a GitHub issue. Swap this link for an email or LinkedIn address when ready. -->
-        <a class="btn" href="https://github.com/ahmed-hamouda-code/anvil/issues/new?title=Pro%20licence%20request">Get Pro</a>
+        <a class="btn" href="https://github.com/ahmed-hamouda-code/anvil/issues/new?template=pro_licence.yml">Get Pro</a>
       </div>
     </div>
     <p class="note">The licence key is checked on your PC against a public key built into the program. The check is offline and nothing is sent anywhere.</p>
@@ -460,12 +471,41 @@ footer a{color:var(--emerald)}
     </div>
   </div>
 </section>
+
+<section id="support" aria-labelledby="h-sup">
+  <div class="wrap">
+    <span class="eyebrow">Support</span>
+    <h2 id="h-sup">Found a problem? Have an idea?</h2>
+    <p class="lead">Tell us on GitHub. Pick what fits and fill in a short form; you need a free GitHub account.</p>
+    <div class="sup">
+      <a class="sup-card" href="https://github.com/ahmed-hamouda-code/anvil/issues/new?template=bug_report.yml">
+        <span class="fx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.5"/></svg></span>
+        <h3>Report a problem</h3>
+        <p>Something does not work as it should. Tell us the version, what you did and what happened.</p>
+        <span class="sup-go">Report an issue &rarr;</span>
+      </a>
+      <a class="sup-card" href="https://github.com/ahmed-hamouda-code/anvil/issues/new?template=feature_request.yml">
+        <span class="fx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg></span>
+        <h3>Suggest a feature</h3>
+        <p>An idea that would make your EBS work easier. Describe the task behind it.</p>
+        <span class="sup-go">Share an idea &rarr;</span>
+      </a>
+      <a class="sup-card" href="https://github.com/ahmed-hamouda-code/anvil/issues">
+        <span class="fx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span>
+        <h3>See known issues</h3>
+        <p>Check whether someone already reported it, and follow what is being fixed.</p>
+        <span class="sup-go">Browse issues &rarr;</span>
+      </a>
+    </div>
+    <p class="fx-key">Reports are public: leave out passwords, host names and customer data.</p>
+  </div>
+</section>
 </main>
 
 <footer>
   <div class="wrap row">
     <span>&copy; 2026 Anvil</span>
-    <span><a href="https://github.com/ahmed-hamouda-code/anvil/releases">Releases</a> · <a href="https://github.com/ahmed-hamouda-code/anvil">Repository</a></span>
+    <span><a href="https://github.com/ahmed-hamouda-code/anvil/issues/new/choose">Report an issue</a> · <a href="https://github.com/ahmed-hamouda-code/anvil/releases">Releases</a> · <a href="https://github.com/ahmed-hamouda-code/anvil">Repository</a></span>
   </div>
 </footer>
 </body>

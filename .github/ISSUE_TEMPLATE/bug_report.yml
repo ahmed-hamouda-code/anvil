@@ -1,0 +1,63 @@
+name: Report a problem
+description: Something in Anvil does not work as it should.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report this.
+        **This page is public.** Do not paste passwords, host names, server addresses, user names or customer data. Replace them with placeholders such as `dev-db.example.local`.
+  - type: input
+    id: version
+    attributes:
+      label: Anvil version
+      description: Help > About Anvil shows it.
+      placeholder: "1.1.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: edition
+    attributes:
+      label: Edition
+      options:
+        - Standard
+        - Pro
+    validations:
+      required: true
+  - type: dropdown
+    id: windows
+    attributes:
+      label: Windows
+      options:
+        - Windows 11
+        - Windows 10
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the workspace ...
+        2. Choose Extract > ...
+        3. See the message ...
+  - type: textarea
+    id: message
+    attributes:
+      label: Error message or log
+      description: The message shown, or the Log panel's text (the Copy log button). Remove anything private first.
+      render: text
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Drag images here if they help. Check them for private names first.
