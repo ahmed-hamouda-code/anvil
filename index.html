@@ -45,6 +45,7 @@
   --border:#cfe3d9;
   --shadow:0 8px 30px rgba(12,21,18,.10);
   --radius:16px;
+  --line:#8fd3b8;
 }
 @media (prefers-color-scheme:dark){
   :root{
@@ -56,6 +57,7 @@
     --green:#2ee59d;
     --green-strong:#5cf0b6;
     --border:#25403a;
+    --line:#2a6b55;
     --shadow:0 8px 30px rgba(0,0,0,.4);
   }
 }
@@ -158,7 +160,7 @@ nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
 .fx-tags li{font-size:.78rem;font-weight:600;color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-radius:99px;padding:3px 10px}
 .fx-tags li.pro{color:var(--green);border-color:var(--green)}
 .fx-tags li.pro::after{content:" PRO";font-size:.62rem;font-weight:800;letter-spacing:.06em;opacity:.8}
-.fx-key{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:24px 0 0;font-size:.92rem;color:var(--muted)}
+.fx-key{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:20px 0 0;font-size:.92rem;color:var(--muted)}
 .pro-dot{width:12px;height:12px;border-radius:99px;border:1.5px solid var(--green)}
 @media (max-width:900px){.fx{grid-template-columns:1fr 1fr}}
 @media (max-width:620px){.fx{grid-template-columns:1fr}}
@@ -172,8 +174,8 @@ nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
 .how-note p{margin:0;color:var(--muted);font-size:.97rem}
 .how-note strong{color:var(--text)}
 .tl{position:relative;list-style:none;margin:0;padding:0}
-.tl-step:not(.tl-last)::after{content:"";position:absolute;left:23px;top:48px;bottom:-14px;width:2px;background:var(--green);opacity:.55}
-.tl-group:not(:first-child)::before{content:"";position:absolute;left:-41px;top:-16px;bottom:-14px;width:2px;background:var(--green);opacity:.55}
+.tl-step:not(.tl-last)::after{content:"";position:absolute;left:23px;top:48px;bottom:-14px;width:2px;background:var(--line)}
+.tl-group:not(:first-child)::before{content:"";position:absolute;left:-41px;top:-16px;bottom:-14px;width:2px;background:var(--line)}
 .tl-group{position:relative;margin:0 0 14px 64px;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green)}
 .tl-group:not(:first-child){margin-top:30px}
 .tl-step{position:relative;display:flex;gap:18px;margin-bottom:14px}
@@ -421,8 +423,7 @@ footer a{color:var(--emerald)}
           <li>Summary report</li>
           <li>Settings backup and restore</li>
         </ul>
-        <!-- Placeholder contact: opens a GitHub issue. Swap this link for an email or LinkedIn address when ready. -->
-        <a class="btn" href="https://github.com/ahmed-hamouda-code/anvil/issues/new?template=pro_licence.yml">Get Pro</a>
+        <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdstbxkSgzAubjrACNrmYvHxTMHOFmyQL8WIcobyDbWcVDIrQ/viewform?usp=pp_url&amp;entry.1759175395=Request+a+Pro+licence" target="_blank" rel="noopener">Get Pro</a>
       </div>
     </div>
     <p class="note">The licence key is checked on your PC against a public key built into the program. The check is offline and nothing is sent anywhere.</p>
@@ -509,28 +510,29 @@ footer a{color:var(--emerald)}
   <div class="wrap">
     <span class="eyebrow">Support</span>
     <h2 id="h-sup">Found a problem? Have an idea?</h2>
-    <p class="lead">Tell us on GitHub. Pick what fits and fill in a short form; you need a free GitHub account.</p>
+    <p class="lead">Pick what fits and fill in a short form. No account needed: it goes straight to us, and we reply by email.</p>
     <div class="sup">
-      <a class="sup-card" href="https://github.com/ahmed-hamouda-code/anvil/issues/new?template=bug_report.yml">
+      <a class="sup-card" href="https://docs.google.com/forms/d/e/1FAIpQLSdstbxkSgzAubjrACNrmYvHxTMHOFmyQL8WIcobyDbWcVDIrQ/viewform?usp=pp_url&amp;entry.1759175395=Report+a+problem" target="_blank" rel="noopener">
         <span class="fx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.5"/></svg></span>
         <h3>Report a problem</h3>
         <p>Something does not work as it should. Tell us the version, what you did and what happened.</p>
         <span class="sup-go">Report an issue &rarr;</span>
       </a>
-      <a class="sup-card" href="https://github.com/ahmed-hamouda-code/anvil/issues/new?template=feature_request.yml">
+      <a class="sup-card" href="https://docs.google.com/forms/d/e/1FAIpQLSdstbxkSgzAubjrACNrmYvHxTMHOFmyQL8WIcobyDbWcVDIrQ/viewform?usp=pp_url&amp;entry.1759175395=Suggest+a+feature" target="_blank" rel="noopener">
         <span class="fx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg></span>
         <h3>Suggest a feature</h3>
         <p>An idea that would make your EBS work easier. Describe the task behind it.</p>
         <span class="sup-go">Share an idea &rarr;</span>
       </a>
-      <a class="sup-card" href="https://github.com/ahmed-hamouda-code/anvil/issues">
-        <span class="fx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span>
-        <h3>See known issues</h3>
-        <p>Check whether someone already reported it, and follow what is being fixed.</p>
-        <span class="sup-go">Browse issues &rarr;</span>
+      <a class="sup-card" href="https://docs.google.com/forms/d/e/1FAIpQLSdstbxkSgzAubjrACNrmYvHxTMHOFmyQL8WIcobyDbWcVDIrQ/viewform?usp=pp_url&amp;entry.1759175395=Request+a+Pro+licence" target="_blank" rel="noopener">
+        <span class="fx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M14 9l2 2"/></svg></span>
+        <h3>Request a Pro licence</h3>
+        <p>Tell us about your team and the Pro features you need, and we will get back to you.</p>
+        <span class="sup-go">Request a licence &rarr;</span>
       </a>
     </div>
-    <p class="fx-key">Reports are public: leave out passwords, host names and customer data.</p>
+    <p class="fx-key">Please leave out passwords, host names and customer data. Forms open in Google Forms.</p>
+    <p class="fx-key">Have a GitHub account? <a href="https://github.com/ahmed-hamouda-code/anvil/issues/new/choose">Open an issue</a> or <a href="https://github.com/ahmed-hamouda-code/anvil/issues">see known issues</a>.</p>
   </div>
 </section>
 </main>
@@ -538,7 +540,7 @@ footer a{color:var(--emerald)}
 <footer>
   <div class="wrap row">
     <span>&copy; 2026 Anvil</span>
-    <span><a href="https://github.com/ahmed-hamouda-code/anvil/issues/new/choose">Report an issue</a> · <a href="https://github.com/ahmed-hamouda-code/anvil/releases">Releases</a> · <a href="https://github.com/ahmed-hamouda-code/anvil">Repository</a></span>
+    <span><a href="https://docs.google.com/forms/d/e/1FAIpQLSdstbxkSgzAubjrACNrmYvHxTMHOFmyQL8WIcobyDbWcVDIrQ/viewform?usp=pp_url&amp;entry.1759175395=Report+a+problem" target="_blank" rel="noopener">Report an issue</a> · <a href="https://github.com/ahmed-hamouda-code/anvil/releases">Releases</a> · <a href="https://github.com/ahmed-hamouda-code/anvil">Repository</a></span>
   </div>
 </footer>
 </body>
