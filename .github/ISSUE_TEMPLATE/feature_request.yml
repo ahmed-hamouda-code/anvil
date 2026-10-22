@@ -1,0 +1,27 @@
+name: Suggest a feature
+description: An idea that would make Anvil more useful.
+title: "[Idea] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: "**This page is public.** Do not include passwords, host names or customer data."
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The task or problem behind the idea.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would help?
+      description: How you would like Anvil to handle it.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Anvil version you use
+      placeholder: "1.1.0"
