@@ -26,25 +26,31 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --paper:#f7f7f3;
-  --paper-2:#efefe9;
+  --paper-2:#ecece5;
   --ink:#1b1e1c;
   --ink-2:#3a403c;
   --muted:#5c625e;
   --rule:#d6d8d1;
+  --rule-band:#cfd1c8;
   --rule-strong:#1b1e1c;
-  --code:#f0f1ec;
+  --code:#f3f3ee;
   --green:#0a6a47;
   --green-ink:#08553a;
-  --flag:#a86b00;
-  --logo:#2ee59d;
-  --logo-tile:#0c1512;
+  --night:#1b1e1c;
+  --on-night:#f1f1ec;
+  --on-night-2:#b9beb9;
+  --night-rule:#3d4440;
+  --night-green:#5fd3a2;
+  --night-flag:#e0a73a;
   --sans:"IBM Plex Sans","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
   --mono:"IBM Plex Mono",Consolas,"Cascadia Mono",ui-monospace,monospace;
+  --head:var(--serif);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
@@ -53,10 +59,13 @@ img,video{max-width:100%;height:auto;display:block}
 a{color:var(--green);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
 a:hover{color:var(--green-ink);text-decoration-thickness:2px}
 :focus-visible{outline:2px solid var(--green);outline-offset:3px}
-h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+h1,h2,h3{margin:0;color:var(--ink)}
+h1,h2{font-family:var(--head);font-weight:600;letter-spacing:-.015em}
+h3{font-weight:600;font-size:1.05rem;line-height:1.35}
 p{margin:0 0 1em}
 code,.mono{font-family:var(--mono);font-size:.92em}
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .skip{position:absolute;left:16px;top:-60px;z-index:100;background:var(--ink);color:var(--paper);padding:10px 16px;text-decoration:none}
 .skip:focus{top:12px}
 
@@ -67,78 +76,90 @@ header.site{position:sticky;top:0;z-index:10;background:rgba(247,247,243,.96);bo
 .brand:hover{color:var(--ink)}
 .brand svg{width:28px;height:28px;flex:none}
 nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
-nav a{color:var(--ink-2);text-decoration:none;font-size:.95rem}
-nav a:hover{color:var(--ink);text-decoration:underline}
+nav a{color:var(--ink-2);text-decoration:none;font-size:.95rem;border-bottom:2px solid transparent;padding:4px 0}
+nav a:hover{color:var(--ink);border-bottom-color:var(--rule)}
+body:has(#how:target) nav a[href="#how"],
+body:has(#features:target) nav a[href="#features"],
+body:has(#editions:target) nav a[href="#editions"],
+body:has(#screenshots:target) nav a[href="#screenshots"],
+body:has(#support:target) nav a[href="#support"]{color:var(--ink);border-bottom-color:var(--green)}
 a.get{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;font-size:.95rem;padding:8px 14px;border-radius:3px;white-space:nowrap}
 a.get:hover{background:#000;color:#fff}
 
 /* type */
-.label{font-family:var(--mono);font-size:.82rem;color:var(--muted);margin:0 0 10px}
-h1{font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.08;letter-spacing:-.025em;font-weight:600;max-width:17ch}
-h2{font-size:clamp(1.55rem,2.6vw,2rem);line-height:1.2}
-h3{font-size:1.05rem;line-height:1.35}
+.label{font-family:var(--mono);font-size:.82rem;color:var(--muted);margin:0 0 12px}
+h1{font-size:clamp(2.2rem,4.4vw,3.35rem);line-height:1.08}
+h2{font-size:clamp(1.6rem,2.6vw,2.05rem);line-height:1.2}
 .lead{font-size:1.15rem;color:var(--ink-2);max-width:62ch}
 .muted{color:var(--muted)}
 .small{font-size:.9rem}
 
-/* sections: numbered, separated by rules */
-section{padding:64px 0;border-top:1px solid var(--rule)}
+/* sections */
+section{padding:72px 0;border-top:1px solid var(--rule)}
+section.band{background:var(--paper-2);border-top-color:var(--rule-band)}
 .sec-head{margin-bottom:32px}
 .sec-head .n{display:block;font-family:var(--mono);font-size:.82rem;color:var(--muted);margin-bottom:8px}
 .sec-head .n::before{content:"\00a7\00a0"}
-.sec-head p{margin:12px 0 0;color:var(--ink-2);max-width:64ch}
+.sec-head p{margin:12px 0 0;color:var(--ink-2);max-width:65ch}
 
 /* hero */
-.hero{padding-top:72px;border-top:0}
-.hero h1{margin-bottom:22px}
-.actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin:28px 0 10px}
+.hero{padding-top:64px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:48px;align-items:center}
+.hero h1{margin-bottom:22px;max-width:16ch}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin:28px 0 12px}
 a.btn{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;padding:13px 22px;border-radius:3px;font-size:1.02rem}
 a.btn:hover{background:#000;color:#fff}
 a.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
 a.btn.line:hover{background:var(--ink);color:var(--paper)}
 .facts{font-family:var(--mono);font-size:.85rem;color:var(--muted);margin:0}
-.shot{margin:48px 0 0;border:1px solid var(--rule);background:#fff}
+.facts a{white-space:nowrap}
+.shot{margin:56px 0 0;border:1px solid var(--ink);background:#fff}
 .shot img{width:100%}
 .caption{font-size:.88rem;color:var(--muted);margin:10px 0 0}
 
-/* ground rules */
-.rules{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule-strong)}
-.rules li{display:grid;grid-template-columns:220px 1fr;gap:4px 24px;padding:14px 0;border-bottom:1px solid var(--rule)}
-.rules b{font-weight:600}
-.rules span{color:var(--ink-2)}
-
-/* artefacts */
-.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:28px;align-items:start}
-.file{border:1px solid var(--rule);background:var(--code)}
-.file .tab{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.8rem;color:var(--muted);padding:8px 14px;border-bottom:1px solid var(--rule);background:var(--paper-2)}
+/* files */
+.file{border:1px solid var(--rule);background:var(--code);min-width:0;overflow:hidden}
+.band .file{border-color:var(--rule-band);background:#fbfbf8}
+.file .tab{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.78rem;color:var(--muted);padding:8px 14px;border-bottom:1px solid var(--rule);background:var(--paper-2)}
+.band .file .tab{background:#f3f3ee;border-bottom-color:var(--rule-band)}
 .file .tab b{color:var(--ink);font-weight:500}
+.file .tab i{font-style:normal;color:var(--muted)}
 .file pre{margin:0;padding:14px 16px;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:400 .8rem/1.6 var(--mono);color:var(--ink)}
 .file .c{color:var(--muted)}
 .file .k{color:var(--ink);font-weight:500}
 .file .v{color:var(--green)}
 .file .ok{color:var(--green);font-weight:500}
-.file-note{font-size:.88rem;color:var(--muted);margin:10px 0 0}
-.arrow{display:none}
-.steps{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0 32px;counter-reset:s;border-top:1px solid var(--rule-strong)}
-.steps li{counter-increment:s;padding:16px 0 18px;border-bottom:1px solid var(--rule)}
+.file-note{font-size:.88rem;color:var(--muted);margin:10px 0 0;max-width:65ch}
+.hero .file pre{font-size:.78rem}
+
+/* ground rules */
+.rules{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 40px;border-top:1px solid var(--rule-strong)}
+.rules li{padding:14px 0 16px;border-bottom:1px solid var(--rule)}
+.rules b{display:block;font-family:var(--mono);font-size:.85rem;font-weight:500;color:var(--ink);margin-bottom:4px}
+.rules span{color:var(--ink-2);font-size:.97rem}
+
+/* how it works */
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:28px;align-items:start}
+.steps{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0 32px;counter-reset:s;border-top:1px solid var(--rule-strong)}
+.steps li{counter-increment:s;padding:16px 0 18px;border-bottom:1px solid var(--rule-band)}
 .steps li::before{content:counter(s);display:block;font-family:var(--mono);font-size:.85rem;color:var(--muted);margin-bottom:4px}
 .steps p{margin:4px 0 0;color:var(--ink-2);font-size:.97rem}
 .steps .where{font-family:var(--mono);font-size:.78rem;color:var(--muted);font-weight:400;margin-left:6px}
 
 /* feature table */
-table.feat{width:100%;border-collapse:collapse;font-size:.97rem}
+table.feat{width:100%;border-collapse:separate;border-spacing:0;font-size:.97rem}
 .feat caption{text-align:left;font-size:.88rem;color:var(--muted);caption-side:bottom;padding-top:12px}
 .feat th,.feat td{text-align:left;vertical-align:top;padding:11px 12px 11px 0;border-bottom:1px solid var(--rule)}
-.feat thead th{font-family:var(--mono);font-size:.8rem;font-weight:500;color:var(--muted);border-bottom:1px solid var(--rule-strong)}
+.feat thead th{position:sticky;top:61px;z-index:2;background:var(--paper);font-family:var(--mono);font-size:.8rem;font-weight:500;color:var(--muted);border-bottom:1px solid var(--rule-strong)}
 .feat tbody th{font-weight:600;width:28%}
-.feat td.ed{width:110px;font-family:var(--mono);font-size:.85rem;white-space:nowrap}
-.feat tr.group th{padding-top:26px;font-family:var(--mono);font-size:.8rem;font-weight:500;color:var(--muted);border-bottom:1px solid var(--rule-strong)}
-.yes{color:var(--green);font-weight:500}
-.no{color:var(--muted)}
+.feat td.ed,.feat th.ed{width:96px;text-align:center;padding-right:0}
+.feat tr.group th{padding:10px 12px;font-family:var(--mono);font-size:.8rem;font-weight:500;color:var(--ink-2);background:var(--paper-2);border-bottom:1px solid var(--rule-band)}
+.yes::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--green);vertical-align:1px}
+.no::before{content:"";display:inline-block;width:12px;height:1.5px;background:var(--muted);vertical-align:4px}
 
 /* pro */
 .offer{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-.offer .price{font-size:1.6rem;font-weight:600;margin:0 0 6px}
+.offer .price{font-family:var(--head);font-size:1.6rem;font-weight:600;margin:0 0 6px}
 .offer .free{font-family:var(--mono);font-size:.88rem;color:var(--green);margin:0 0 16px}
 ol.how{margin:0;padding:0;list-style:none;counter-reset:h;border-top:1px solid var(--rule-strong)}
 ol.how li{counter-increment:h;display:grid;grid-template-columns:32px 1fr;padding:14px 0;border-bottom:1px solid var(--rule)}
@@ -149,14 +170,17 @@ ol.how span{color:var(--ink-2)}
 /* screenshots */
 .gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 28px}
 figure{margin:0}
-figure a{display:block;border:1px solid var(--rule);background:#fff}
-figure a:hover{border-color:var(--ink)}
-figcaption{font-size:.9rem;color:var(--ink-2);margin-top:10px}
+figure a.crop{display:block;border:1px solid var(--ink);background:#fff;aspect-ratio:16/10;overflow:hidden}
+figure a.crop img{width:160%;max-width:none;height:auto}
+figure a.crop:hover{outline:2px solid var(--green);outline-offset:2px}
+figcaption{font-size:.92rem;color:var(--ink-2);margin-top:10px;max-width:65ch}
+figcaption .full{font-family:var(--mono);font-size:.8rem;margin-left:6px}
 figure.wide{grid-column:1/-1}
-video{width:100%;background:#000;border:1px solid var(--rule);margin-top:14px}
+figure.wide h3{margin-bottom:12px}
+video{width:100%;background:#000;border:1px solid var(--ink)}
 .tour-text{margin-top:12px;font-size:.95rem;color:var(--ink-2)}
 .tour-text summary{cursor:pointer;color:var(--green)}
-.tour-text ol{margin:12px 0 0;padding-left:22px}
+.tour-text ol{margin:12px 0 0;padding-left:22px;max-width:75ch}
 .tour-text li{margin:6px 0}
 
 /* what's new */
@@ -165,20 +189,33 @@ dl.news div{padding:13px 0;border-bottom:1px solid var(--rule)}
 dl.news dt{font-weight:600}
 dl.news dd{margin:2px 0 0;color:var(--ink-2);font-size:.97rem}
 
-/* download */
+/* download: the dark end of the page */
+section.night{background:var(--night);color:var(--on-night);border-top:0}
+.night h2,.night h3{color:var(--on-night)}
+.night .sec-head .n,.night .facts{color:var(--on-night-2)}
+.night .sec-head p{color:var(--on-night-2)}
+.night a{color:var(--night-green)}
+.night a.btn{background:var(--paper);color:var(--ink)}
+.night a.btn:hover{background:#fff;color:#000}
+.night :focus-visible{outline-color:var(--night-green)}
 .dl{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:start}
-.note{border-left:3px solid var(--flag);padding:2px 0 2px 14px;color:var(--ink-2);font-size:.95rem;margin:18px 0 0;max-width:62ch}
-ul.plain{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule-strong)}
-ul.plain li{padding:10px 0;border-bottom:1px solid var(--rule);color:var(--ink-2);font-size:.97rem}
+.note{border-left:3px solid var(--night-flag);padding:2px 0 2px 14px;color:var(--on-night-2);font-size:.95rem;margin:20px 0 0;max-width:62ch}
+.note strong{color:var(--on-night)}
+ul.plain{margin:0;padding:0;list-style:none;border-top:1px solid var(--on-night-2)}
+ul.plain li{padding:10px 0;border-bottom:1px solid var(--night-rule);color:var(--on-night-2);font-size:.97rem}
 
 /* support */
 .sup{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule-strong)}
 .sup li{display:grid;grid-template-columns:240px 1fr;gap:4px 24px;padding:16px 0;border-bottom:1px solid var(--rule)}
 .sup a{font-weight:600}
-.sup span{color:var(--ink-2)}
+.sup span{color:var(--ink-2);max-width:65ch}
 
-footer{border-top:1px solid var(--rule);padding:28px 0 40px;font-size:.9rem;color:var(--muted)}
-footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer{border-top:1px solid var(--rule);padding:32px 0 44px;font-size:.9rem;color:var(--muted)}
+footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px}
+footer .row + .row{margin-top:10px}
+footer .who{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:600}
+footer .who svg{width:22px;height:22px}
+footer .ver{font-family:var(--mono);font-size:.82rem}
 
 @media (max-width:900px){
   .bar{flex-wrap:wrap;row-gap:0}
@@ -187,30 +224,34 @@ footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   nav ul::-webkit-scrollbar{display:none}
   nav a{display:flex;align-items:center;min-height:44px;padding:0 8px}
   html{scroll-padding-top:116px}
-  .pair,.offer,.dl{grid-template-columns:1fr}
-  .steps{grid-template-columns:1fr 1fr}
+  .hero-grid,.pair,.offer,.dl{grid-template-columns:minmax(0,1fr)}
+  .hero-grid{gap:32px}
+  .steps{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .feat thead th{top:105px}
 }
 @media (max-width:620px){
   .wrap{padding:0 16px}
   nav{margin:0 -16px;width:calc(100% + 32px)}
-  section{padding:48px 0}
-  .hero{padding-top:44px}
-  .steps,.gallery,dl.news{grid-template-columns:1fr}
-  .rules li,.sup li{grid-template-columns:1fr}
+  section{padding:52px 0}
+  .hero{padding-top:40px}
+  .steps,.gallery,dl.news,.rules{grid-template-columns:minmax(0,1fr)}
+  .sup li{grid-template-columns:1fr}
+  .actions a.btn{display:block;width:100%;text-align:center}
+  .file pre{white-space:pre;overflow-wrap:normal;-webkit-mask-image:linear-gradient(to right,#000 82%,transparent);mask-image:linear-gradient(to right,#000 82%,transparent)}
+  .file pre:hover{-webkit-mask-image:none;mask-image:none}
   .feat tr{display:grid;grid-template-columns:minmax(0,1fr) 72px 40px;column-gap:8px;border-bottom:1px solid var(--rule)}
+  .feat thead th{position:static;border-bottom:0}
   .feat thead tr{border-bottom:1px solid var(--rule-strong)}
-  .feat thead th{border-bottom:0}
   .feat th,.feat td{border-bottom:0;padding:10px 0 4px}
   .feat .desc{grid-column:1/-1;grid-row:2;padding:0 0 12px;color:var(--ink-2);font-size:.93rem}
   .feat thead .desc{display:none}
-  .feat td.ed{width:auto}
+  .feat td.ed,.feat th.ed{width:auto}
   .feat tr > :first-child{grid-column:1;grid-row:1}
   .feat tr > :nth-child(3){grid-column:2;grid-row:1}
   .feat tr > :nth-child(4){grid-column:3;grid-row:1}
   .feat tbody th{width:auto}
   .feat tr.group{display:block}
-  .feat tr.group th{display:block;padding-top:24px}
-  .actions a.btn{display:block;width:100%;text-align:center}
+  .feat tr.group th{display:block;margin-top:16px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
@@ -241,23 +282,52 @@ footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 <span id="main" tabindex="-1"></span>
 
 <div class="hero wrap" role="region" aria-labelledby="h-hero">
-  <p class="label">For Oracle E-Business Suite R12.2 · Windows</p>
-  <h1 id="h-hero">Oracle EBS custom code, from instance to a checked deploy.</h1>
-  <p class="lead">Describe what you build, bring the real objects in from an instance, check them against your team's rules and generate the scripts that deploy them. Anvil then tells you whether an instance still matches.</p>
-  <div class="actions">
-    <a class="btn" href="https://github.com/ahmed-hamouda-code/anvil/releases/latest/download/Anvil-windows-x64.zip">Download for Windows</a>
-    <a class="btn line" href="#how">How it works</a>
+  <div class="hero-grid">
+    <div>
+      <p class="label">For Oracle E-Business Suite R12.2 · Windows</p>
+      <h1 id="h-hero">Oracle EBS custom code, from instance to a checked deploy.</h1>
+      <p class="lead">Describe what you build, bring the real objects in from an instance, check them against your team's rules and generate the scripts that deploy them. Anvil then tells you whether an instance still matches.</p>
+      <div class="actions">
+        <a class="btn" href="https://github.com/ahmed-hamouda-code/anvil/releases/latest/download/Anvil-windows-x64.zip">Download for Windows</a>
+        <a class="btn line" href="#how">How it works</a>
+      </div>
+      <p class="facts">Version 1.2.0 · 64-bit · free Standard edition · <a href="https://github.com/ahmed-hamouda-code/anvil/releases">release notes</a></p>
+    </div>
+    <div>
+      <div class="file">
+        <div class="tab"><b><i>HCM/XXHR_PAYSLIP_REPORT/_generated/</i>deploy.sh</b><span>header</span></div>
+<pre><span class="c">#!/usr/bin/env bash
+# ================================================
+# Anvil: deploy script (apps tier)</span>
+<span class="c"># Item:</span>          <span class="k">HCM/XXHR_PAYSLIP_REPORT</span>
+<span class="c"># Target:</span>        <span class="k">UAT</span>
+<span class="c"># Generated by:</span>  <span class="k">Anvil 1.2.0</span>
+<span class="c"># ================================================
+#
+# Order of operations: verify checksums, take the
+# APPS password, confirm the database is the
+# expected one, back up the current version of
+# every object this item touches, deploy in fixed
+# type order, report invalid objects, list the
+# manual follow-ups. The first failing step stops
+# the script.
+#
+# Exit codes: 0 ok; 2 precondition; 10 checksum
+# mismatch; 20 wrong instance; 25 backup failed;
+# 30 a deploy step failed.</span></pre>
+      </div>
+      <p class="file-note">The top of a script Anvil wrote for the demo report Item, shortened. A person reads it, then runs it.</p>
+    </div>
   </div>
-  <p class="facts">Version 1.2.0 · 64-bit · free Standard edition · <a href="https://github.com/ahmed-hamouda-code/anvil/releases">release notes</a></p>
   <figure class="shot">
     <img src="assets/guide-window.png" width="1920" height="1140" alt="The Anvil window: a workspace tree of folders and items on the left, and an overview showing how many items are ready to deploy on the right">
   </figure>
   <p class="caption">The main window with a demo workspace: folders and items on the left, what is ready to deploy on the right.</p>
 </div>
 
-<section aria-labelledby="h-rules" style="margin-top:56px">
+<section aria-labelledby="h-rules" style="margin-top:64px">
   <div class="wrap">
-    <div class="sec-head"><span class="n">1</span><div><h2 id="h-rules">Ground rules</h2><p>Anvil prepares and checks. A person stays in charge of every change.</p></div></div>
+    <div class="sec-head"><span class="n">1</span><h2 id="h-rules">Ground rules</h2><p>Anvil prepares and checks. A person stays in charge of every change.</p></div>
     <ul class="rules">
       <li><b>Reads, never writes</b><span>Anvil only reads your database: it looks objects up and never changes them. The script you run makes the changes.</span></li>
       <li><b>Never runs a deploy</b><span>It writes the deploy script; a person reads it and runs it on the apps server.</span></li>
@@ -268,13 +338,13 @@ footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   </div>
 </section>
 
-<section id="how" aria-labelledby="h-how">
+<section id="how" class="band" aria-labelledby="h-how">
   <div class="wrap">
-    <div class="sec-head"><span class="n">2</span><div><h2 id="h-how">How it works</h2><p>Each deliverable is an Item: a folder with a short manifest that lists its objects. Anvil checks the manifest against your rules and writes the deploy script from it.</p></div></div>
+    <div class="sec-head"><span class="n">2</span><h2 id="h-how">How it works</h2><p>Each deliverable is an Item: a folder with a short manifest that lists its objects. Anvil checks the manifest against your rules and writes the deploy script from it.</p></div>
     <div class="pair">
       <div>
         <div class="file">
-          <div class="tab"><b>item.yaml</b><span>what you describe</span></div>
+          <div class="tab"><b><i>HCM/XXHR_PAYSLIP_REPORT/</i>item.yaml</b><span>what you describe</span></div>
 <pre><span class="k">item:</span> <span class="v">XXHR_PAYSLIP_REPORT</span>
 <span class="k">folder:</span> <span class="v">HCM</span>
 <span class="k">type:</span> <span class="v">report</span>
@@ -299,7 +369,7 @@ footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       </div>
       <div>
         <div class="file">
-          <div class="tab"><b>deploy.sh on UAT</b><span>what it prints</span></div>
+          <div class="tab"><b><i>_generated/</i>deploy.sh on UAT</b><span>what it prints</span></div>
 <pre>Anvil deploy script for HCM/XXHR_PAYSLIP_REPORT on UAT, log: deploy_XXHR_PAYSLIP_REPORT_UAT_20261109_091502.log
 NLS_LANG: AMERICAN_AMERICA.AL32UTF8
 [09:15:02] STEP: verify checksums
@@ -340,28 +410,28 @@ To undo this deploy: bash _generated/restore.sh backup/20261109_091502</pre>
 
 <section id="features" aria-labelledby="h-feat">
   <div class="wrap">
-    <div class="sec-head"><span class="n">3</span><div><h2 id="h-feat">Features</h2><p>One program, two editions. Without a licence key Anvil is the Standard edition; a signed licence key switches on Pro.</p></div></div>
+    <div class="sec-head"><span class="n">3</span><h2 id="h-feat">Features</h2><p>One program, two editions. Without a licence key Anvil is the Standard edition; a signed licence key switches on Pro.</p></div>
     <table class="feat">
-      <caption>Pro features are marked "(Pro)" in the window, so you can see what they do before you switch them on.</caption>
-      <thead><tr><th scope="col">Feature</th><th scope="col" class="desc">What it does</th><th scope="col">Standard</th><th scope="col">Pro</th></tr></thead>
+      <caption>A dot means the edition has the feature. Pro features are marked "(Pro)" in the window, so you can see what they do before you switch them on.</caption>
+      <thead><tr><th scope="col">Feature</th><th scope="col" class="desc">What it does</th><th scope="col" class="ed">Standard</th><th scope="col" class="ed">Pro</th></tr></thead>
       <tbody>
         <tr class="group"><th colspan="4" scope="colgroup">Every Item</th></tr>
-        <tr><th scope="row">Workspace and Items</th><td class="desc">Folders, Items and the item editor; Overview, Problems, side-by-side Differences and the command palette.</td><td class="ed yes">yes</td><td class="ed yes">yes</td></tr>
-        <tr><th scope="row">Instances</th><td class="desc">Define each database and apps server once; passwords in the credential store.</td><td class="ed yes">yes</td><td class="ed yes">yes</td></tr>
-        <tr><th scope="row">Extract</th><td class="desc">Database objects, concurrent programs, XML Publisher, workflow and OAF; on your PC or by the read-only extract over SSH.</td><td class="ed yes">yes</td><td class="ed yes">yes</td></tr>
-        <tr><th scope="row">Validate</th><td class="desc">Naming and prefix rules, and which Item owns each object.</td><td class="ed yes">yes</td><td class="ed yes">yes</td></tr>
-        <tr><th scope="row">Generate</th><td class="desc">Deploy and restore scripts for one Item, with checksums, backups and a fixed order; register the log afterwards.</td><td class="ed yes">yes</td><td class="ed yes">yes</td></tr>
-        <tr><th scope="row">Drift</th><td class="desc">One Item against one instance, on screen.</td><td class="ed yes">yes</td><td class="ed yes">yes</td></tr>
-        <tr><th scope="row">Inspect</th><td class="desc">Invalid objects, the online patching cycle check and Search.</td><td class="ed yes">yes</td><td class="ed yes">yes</td></tr>
+        <tr><th scope="row">Workspace and Items</th><td class="desc">Folders, Items and the item editor; Overview, Problems, side-by-side Differences and the command palette.</td><td class="ed yes"><span class="vh">yes</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
+        <tr><th scope="row">Instances</th><td class="desc">Define each database and apps server once; passwords in the credential store.</td><td class="ed yes"><span class="vh">yes</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
+        <tr><th scope="row">Extract</th><td class="desc">Database objects, concurrent programs, XML Publisher, workflow and OAF; on your PC or by the read-only extract over SSH.</td><td class="ed yes"><span class="vh">yes</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
+        <tr><th scope="row">Validate</th><td class="desc">Naming and prefix rules, and which Item owns each object.</td><td class="ed yes"><span class="vh">yes</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
+        <tr><th scope="row">Generate</th><td class="desc">Deploy and restore scripts for one Item, with checksums, backups and a fixed order; register the log afterwards.</td><td class="ed yes"><span class="vh">yes</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
+        <tr><th scope="row">Drift</th><td class="desc">One Item against one instance, on screen.</td><td class="ed yes"><span class="vh">yes</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
+        <tr><th scope="row">Inspect</th><td class="desc">Invalid objects, the online patching cycle check and Search.</td><td class="ed yes"><span class="vh">yes</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
         <tr class="group"><th colspan="4" scope="colgroup">Teams and releases</th></tr>
-        <tr><th scope="row">Mass Items</th><td class="desc">Find programs on an instance and create many Items in one go.</td><td class="ed no">no</td><td class="ed yes">yes</td></tr>
-        <tr><th scope="row">Mass DB objects</th><td class="desc">Find database objects by type and prefix and add them to an Item, with their grants.</td><td class="ed no">no</td><td class="ed yes">yes</td></tr>
-        <tr><th scope="row">Objects used by reports</th><td class="desc">The custom objects a report's queries and data templates use, for one Item or a whole Folder.</td><td class="ed no">no</td><td class="ed yes">yes</td></tr>
-        <tr><th scope="row">Release package</th><td class="desc">Several Items in one release, in a suggested order, with a change summary for the approver.</td><td class="ed no">no</td><td class="ed yes">yes</td></tr>
-        <tr><th scope="row">Compare and Refresh</th><td class="desc">Compare two instances; preview and take changes from an instance.</td><td class="ed no">no</td><td class="ed yes">yes</td></tr>
-        <tr><th scope="row">Checks</th><td class="desc">Pre-deploy checklist, Verify queries and Dependencies.</td><td class="ed no">no</td><td class="ed yes">yes</td></tr>
-        <tr><th scope="row">Reports</th><td class="desc">Drift reports as HTML and Excel, and the Summary report.</td><td class="ed no">no</td><td class="ed yes">yes</td></tr>
-        <tr><th scope="row">Team tools</th><td class="desc">Your own item templates, Git, and settings backup and restore.</td><td class="ed no">no</td><td class="ed yes">yes</td></tr>
+        <tr><th scope="row">Mass Items</th><td class="desc">Find programs on an instance and create many Items in one go.</td><td class="ed no"><span class="vh">no</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
+        <tr><th scope="row">Mass DB objects</th><td class="desc">Find database objects by type and prefix and add them to an Item, with their grants.</td><td class="ed no"><span class="vh">no</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
+        <tr><th scope="row">Objects used by reports</th><td class="desc">The custom objects a report's queries and data templates use, for one Item or a whole Folder.</td><td class="ed no"><span class="vh">no</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
+        <tr><th scope="row">Release package</th><td class="desc">Several Items in one release, in a suggested order, with a change summary for the approver.</td><td class="ed no"><span class="vh">no</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
+        <tr><th scope="row">Compare and Refresh</th><td class="desc">Compare two instances; preview and take changes from an instance.</td><td class="ed no"><span class="vh">no</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
+        <tr><th scope="row">Checks</th><td class="desc">Pre-deploy checklist, Verify queries and Dependencies.</td><td class="ed no"><span class="vh">no</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
+        <tr><th scope="row">Reports</th><td class="desc">Drift reports as HTML and Excel, and the Summary report.</td><td class="ed no"><span class="vh">no</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
+        <tr><th scope="row">Team tools</th><td class="desc">Your own item templates, Git, and settings backup and restore.</td><td class="ed no"><span class="vh">no</span></td><td class="ed yes"><span class="vh">yes</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -369,12 +439,12 @@ To undo this deploy: bash _generated/restore.sh backup/20261109_091502</pre>
 
 <section id="editions" aria-labelledby="h-ed">
   <div class="wrap">
-    <div class="sec-head"><span class="n">4</span><div><h2 id="h-ed">Getting Pro</h2><p>Standard is free and stays free. Pro adds the features for teams and releases.</p></div></div>
+    <div class="sec-head"><span class="n">4</span><h2 id="h-ed">Getting Pro</h2><p>Standard is free and stays free. Pro adds the features for teams and releases.</p></div>
     <div class="offer">
       <div>
         <p class="price">Licence key</p>
         <p class="free">Free for the first 3 months</p>
-        <p class="muted">The key is checked on your PC against a public key built into the program. The check is offline and nothing is sent anywhere.</p>
+        <p class="muted" style="max-width:52ch">The key is checked on your PC against a public key built into the program. The check is offline and nothing is sent anywhere.</p>
         <p><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdstbxkSgzAubjrACNrmYvHxTMHOFmyQL8WIcobyDbWcVDIrQ/viewform?usp=pp_url&amp;entry.1759175395=Request+a+Pro+licence" target="_blank" rel="noopener">Request Pro, free for 3 months</a></p>
       </div>
       <ol class="how">
@@ -386,25 +456,25 @@ To undo this deploy: bash _generated/restore.sh backup/20261109_091502</pre>
   </div>
 </section>
 
-<section id="screenshots" aria-labelledby="h-shots">
+<section id="screenshots" class="band" aria-labelledby="h-shots">
   <div class="wrap">
-    <div class="sec-head"><span class="n">5</span><div><h2 id="h-shots">Screenshots</h2><p>All screenshots use demo data. Click one to open it full size.</p></div></div>
+    <div class="sec-head"><span class="n">5</span><h2 id="h-shots">Screenshots</h2><p>All screenshots use demo data. Each shows the part that matters; open one for the whole window.</p></div>
     <div class="gallery">
       <figure>
-        <a href="assets/guide-instances.png" target="_blank" rel="noopener"><img src="assets/guide-instances.png" width="1650" height="1020" loading="lazy" alt="The Instances window with the list of instances and their connection settings"></a>
-        <figcaption>Instances: define a database and apps server once, test the connection, share it across workspaces.</figcaption>
+        <a class="crop" href="assets/guide-instances.png" target="_blank" rel="noopener"><img src="assets/guide-instances.png" width="1650" height="1020" loading="lazy" style="margin-left:-36%" alt="The Instances window with the list of instances and their connection settings"></a>
+        <figcaption>Instances: define a database and apps server once, test the connection, share it across workspaces.<a class="full" href="assets/guide-instances.png" target="_blank" rel="noopener">full window</a></figcaption>
       </figure>
       <figure>
-        <a href="assets/guide-item-editor.png" target="_blank" rel="noopener"><img src="assets/guide-item-editor.png" width="1500" height="930" loading="lazy" alt="The item editor listing a report Item's objects: packages, views, a table and a function"></a>
-        <figcaption>The item editor: every object an Item holds, with the state of its file.</figcaption>
+        <a class="crop" href="assets/guide-item-editor.png" target="_blank" rel="noopener"><img src="assets/guide-item-editor.png" width="1500" height="930" loading="lazy" alt="The item editor listing a report Item's objects: packages, views, a table and a function"></a>
+        <figcaption>The item editor: every object an Item holds, with the state of its file.<a class="full" href="assets/guide-item-editor.png" target="_blank" rel="noopener">full window</a></figcaption>
       </figure>
       <figure>
-        <a href="assets/guide-mass-items.png" target="_blank" rel="noopener"><img src="assets/guide-mass-items.png" width="1500" height="960" loading="lazy" alt="The Mass Items window with its three steps: Find, Pick and Create"></a>
-        <figcaption>Mass Items (Pro): find programs on an instance, tick the ones you want and create Items in one go.</figcaption>
+        <a class="crop" href="assets/guide-mass-items.png" target="_blank" rel="noopener"><img src="assets/guide-mass-items.png" width="1500" height="960" loading="lazy" alt="The Mass Items window with its three steps: Find, Pick and Create"></a>
+        <figcaption>Mass Items (Pro): find programs on an instance, tick the ones you want and create Items in one go.<a class="full" href="assets/guide-mass-items.png" target="_blank" rel="noopener">full window</a></figcaption>
       </figure>
       <figure>
-        <a href="assets/guide-release.png" target="_blank" rel="noopener"><img src="assets/guide-release.png" width="1350" height="960" loading="lazy" alt="The Release package window for bundling Items into one release"></a>
-        <figcaption>Release package (Pro): bundle several Items into one release that runs in your order.</figcaption>
+        <a class="crop" href="assets/guide-release.png" target="_blank" rel="noopener"><img src="assets/guide-release.png" width="1350" height="960" loading="lazy" alt="The Release package window for bundling Items into one release"></a>
+        <figcaption>Release package (Pro): bundle several Items into one release that runs in your order.<a class="full" href="assets/guide-release.png" target="_blank" rel="noopener">full window</a></figcaption>
       </figure>
       <figure class="wide">
         <h3>The tour, 58 seconds</h3>
@@ -431,7 +501,7 @@ To undo this deploy: bash _generated/restore.sh backup/20261109_091502</pre>
 
 <section id="news" aria-labelledby="h-new">
   <div class="wrap">
-    <div class="sec-head"><span class="n">6</span><div><h2 id="h-new">What's new in 1.2</h2><p class="mono small muted">Released 8 November 2026</p></div></div>
+    <div class="sec-head"><span class="n">6</span><h2 id="h-new">What's new in 1.2</h2><p class="mono small muted">Released 8 November 2026</p></div>
     <dl class="news">
       <div><dt>Clearer windows</dt><dd>Plain forms, clear tabs, and buttons that say what they do.</dd></div>
       <div><dt>Passwords where you work</dt><dd>See, change or forget a stored password in Instances.</dd></div>
@@ -445,9 +515,9 @@ To undo this deploy: bash _generated/restore.sh backup/20261109_091502</pre>
   </div>
 </section>
 
-<section id="download" aria-labelledby="h-dl">
+<section id="download" class="night" aria-labelledby="h-dl">
   <div class="wrap">
-    <div class="sec-head"><span class="n">7</span><div><h2 id="h-dl">Download</h2><p>The Standard edition is free. A Pro licence key switches on the Pro features.</p></div></div>
+    <div class="sec-head"><span class="n">7</span><h2 id="h-dl">Download</h2><p>The Standard edition is free. A Pro licence key switches on the Pro features.</p></div>
     <div class="dl">
       <div>
         <p><a class="btn" href="https://github.com/ahmed-hamouda-code/anvil/releases/latest/download/Anvil-windows-x64.zip">Download Anvil 1.2.0 for Windows</a></p>
@@ -470,21 +540,27 @@ To undo this deploy: bash _generated/restore.sh backup/20261109_091502</pre>
 
 <section id="support" aria-labelledby="h-sup">
   <div class="wrap">
-    <div class="sec-head"><span class="n">8</span><div><h2 id="h-sup">Support</h2><p>Pick what fits and fill in a short form. No account needed: it goes straight to us, and we reply by email.</p></div></div>
+    <div class="sec-head"><span class="n">8</span><h2 id="h-sup">Support</h2><p>Pick what fits and fill in a short form. No account needed: it goes straight to us, and we reply by email.</p></div>
     <ul class="sup">
       <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdstbxkSgzAubjrACNrmYvHxTMHOFmyQL8WIcobyDbWcVDIrQ/viewform?usp=pp_url&amp;entry.1759175395=Report+a+problem" target="_blank" rel="noopener">Report a problem</a><span>Something does not work as it should. Tell us the version, what you did and what happened.</span></li>
       <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdstbxkSgzAubjrACNrmYvHxTMHOFmyQL8WIcobyDbWcVDIrQ/viewform?usp=pp_url&amp;entry.1759175395=Suggest+a+feature" target="_blank" rel="noopener">Suggest a feature</a><span>An idea that would make your EBS work easier. Describe the task behind it.</span></li>
       <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdstbxkSgzAubjrACNrmYvHxTMHOFmyQL8WIcobyDbWcVDIrQ/viewform?usp=pp_url&amp;entry.1759175395=Request+a+Pro+licence" target="_blank" rel="noopener">Request a Pro licence</a><span>Tell us about your team and the Pro features you need. We reply within 1 working day; the first 3 months are free.</span></li>
     </ul>
-    <p class="small muted" style="margin-top:16px">Please leave out passwords, host names and customer data. Forms open in Google Forms. Have a GitHub account? <a href="https://github.com/ahmed-hamouda-code/anvil/issues/new/choose">Open an issue</a> or <a href="https://github.com/ahmed-hamouda-code/anvil/issues">see known issues</a>.</p>
+    <p class="small muted" style="margin-top:16px;max-width:75ch">Please leave out passwords, host names and customer data. Forms open in Google Forms. Have a GitHub account? <a href="https://github.com/ahmed-hamouda-code/anvil/issues/new/choose">Open an issue</a> or <a href="https://github.com/ahmed-hamouda-code/anvil/issues">see known issues</a>.</p>
   </div>
 </section>
 </main>
 
 <footer>
-  <div class="wrap row">
-    <span>&copy; 2026 Anvil · Made by an Oracle EBS developer · <a href="https://www.linkedin.com/in/ahmed-hamouda-erp/" target="_blank" rel="noopener">LinkedIn</a></span>
-    <span><a href="https://docs.google.com/forms/d/e/1FAIpQLSdstbxkSgzAubjrACNrmYvHxTMHOFmyQL8WIcobyDbWcVDIrQ/viewform?usp=pp_url&amp;entry.1759175395=Report+a+problem" target="_blank" rel="noopener">Report an issue</a> · <a href="https://github.com/ahmed-hamouda-code/anvil/releases">Releases</a> · <a href="https://github.com/ahmed-hamouda-code/anvil">Repository</a></span>
+  <div class="wrap">
+    <div class="row">
+      <span class="who"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x=".5" y=".5" width="31" height="31" rx="6" fill="#0c1512"/><g fill="#2ee59d"><path d="M10.5 8.5h18v7h-18C7 15.5 4.2 13.6 2.6 11.4 5 10 7.8 8.5 10.5 8.5z"/><path d="M13 15.3h12l-2.4 6h-7.2z"/><path d="M11 21h16l2.5 5.5h-21z"/></g></svg>Anvil</span>
+      <span class="ver">Version 1.2.0 · 8 November 2026</span>
+    </div>
+    <div class="row">
+      <span>&copy; 2026 Anvil · Made by an Oracle EBS developer · <a href="https://www.linkedin.com/in/ahmed-hamouda-erp/" target="_blank" rel="noopener">LinkedIn</a></span>
+      <span><a href="https://docs.google.com/forms/d/e/1FAIpQLSdstbxkSgzAubjrACNrmYvHxTMHOFmyQL8WIcobyDbWcVDIrQ/viewform?usp=pp_url&amp;entry.1759175395=Report+a+problem" target="_blank" rel="noopener">Report an issue</a> · <a href="https://github.com/ahmed-hamouda-code/anvil/releases">Releases</a> · <a href="https://github.com/ahmed-hamouda-code/anvil">Repository</a></span>
+    </div>
   </div>
 </footer>
 </body>
