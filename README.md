@@ -26,5 +26,5 @@ so the asset name must never change. For each release:
 
 ## Notes
 
-- The "Get Pro" button opens a pre-filled GitHub issue as a placeholder contact. Swap the link in `index.html` (see the HTML comment next to it) for an email or LinkedIn address when ready.
+- Pro requests, problems and ideas go through one Google Form (its first answer pre-filled by each link). The site promises a reply within 1 working day and the first 3 months of Pro free; change both places in `index.html` (How to get Pro and the Support card) if that changes.
 - `assets/og-card.png` (1200x630) is the preview image shown when the link is shared; the page's Open Graph tags use absolute URLs, so keep the site address in them in step with the repository name.
