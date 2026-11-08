@@ -22,7 +22,7 @@ so the asset name must never change. For each release:
 2. Attach the **same zip a second time, renamed to `Anvil-windows-x64.zip`**. This copy is what the button downloads.
 3. Mark the release **Latest**: not a draft and not a pre-release (the `latest` link ignores both).
 4. Put the checksums and the release notes in the release description.
-5. Update the version text ("Version 1.1.0", and the "What's new" list) in `index.html` and commit.
+5. Update the version text in `index.html` (the logo's "v1.2", the hero's "NEW Version 1.2" pill, "Version 1.2.0" under the Download button, and the "What's new" list) and commit.
 
 ## Notes
 

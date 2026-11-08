@@ -246,7 +246,7 @@ footer a{color:var(--emerald)}
   <div class="wrap bar">
     <a class="brand" href="#top" aria-label="Anvil, back to the top">
       <svg viewBox="0 0 32 32" aria-hidden="true"><rect x=".5" y=".5" width="31" height="31" rx="8" fill="#0c1512" stroke="#2ee59d" stroke-opacity=".35"/><g fill="#2ee59d"><path d="M10.5 8.5h18v7h-18C7 15.5 4.2 13.6 2.6 11.4 5 10 7.8 8.5 10.5 8.5z"/><path d="M13 15.3h12l-2.4 6h-7.2z"/><path d="M11 21h16l2.5 5.5h-21z"/></g></svg>
-      Anvil <span class="ver">v1.1</span>
+      Anvil <span class="ver">v1.2</span>
     </a>
     <nav aria-label="Main">
       <ul>
@@ -265,7 +265,7 @@ footer a{color:var(--emerald)}
 <section class="hero dark" aria-labelledby="h-hero">
   <div class="wrap hero-grid">
     <div>
-      <a class="pill" href="#news"><b>NEW</b> Version 1.1: Workspace Settings, new themes and more &rarr;</a>
+      <a class="pill" href="#news"><b>NEW</b> Version 1.2: clearer windows, APEX applications and more &rarr;</a>
       <span class="kicker">From instance to verified deploy</span>
       <h1 id="h-hero">Your Oracle EBS custom code, <em>under control.</em></h1>
       <p class="lead">Describe what you build, bring the real objects in from an instance, check them against your team's rules and generate the scripts that deploy them. Anvil then tells you whether an instance still matches.</p>
@@ -453,13 +453,15 @@ footer a{color:var(--emerald)}
 <section id="news" aria-labelledby="h-new">
   <div class="wrap">
     <span class="eyebrow">What's new</span>
-    <h2 id="h-new">What's new in 1.1</h2>
+    <h2 id="h-new">What's new in 1.2</h2>
     <ul class="news">
-      <li><strong>Workspace Settings.</strong> One window for everything your team shares: Folders, naming, the checklist and, new in this version, the deploy options.</li>
-      <li><strong>Splash screen.</strong> Anvil now opens with a splash screen showing the version and edition. You can turn it off in Settings.</li>
-      <li><strong>Anvil themes.</strong> Two new looks in Anvil's own greens, one dark and one light. The light one is now the default.</li>
-      <li><strong>Objects used by reports (Pro).</strong> For a report Item, Anvil reads its queries and data templates, finds the custom objects they use on the instance and lists them so you can add them to the Item.</li>
-      <li><strong>Clearer messages.</strong> Message banners and field marks in every task window show what needs your attention.</li>
+      <li><strong>Clearer windows.</strong> New item is a plain form, Instances has separate Database and Apps server tabs, and every dialog has a heading and buttons that say what they do.</li>
+      <li><strong>Passwords where you work.</strong> Instances shows whether a password is stored on this PC and lets you change or forget it. Save and test saves first, then tests.</li>
+      <li><strong>APEX applications.</strong> Add an exported APEX application to an Item. Anvil keeps it, checks it and lists it as a step you install by hand in the release package.</li>
+      <li><strong>Reports run by a PL/SQL procedure.</strong> Adding such a program brings its package, data definition and every template, and the Item extracts and deploys them in the right order.</li>
+      <li><strong>Objects used by reports on a whole Folder (Pro).</strong> Scan every Item of a Folder at once, with your own database and application prefixes.</li>
+      <li><strong>Fast on large workspaces.</strong> Refreshing takes a moment with 1,000 Items, Mass Items lists thousands of objects at once, and checks and Extract need fewer trips to the database.</li>
+      <li><strong>Safer to use.</strong> No crash when Anvil closes, closing a window waits for its work, and a lost connection or a refused login stops a run cleanly.</li>
     </ul>
     <p class="note"><a href="https://github.com/ahmed-hamouda-code/anvil/releases">Read the full release notes</a></p>
   </div>
@@ -471,7 +473,7 @@ footer a{color:var(--emerald)}
     <h2 id="h-dl">Get Anvil for Windows</h2>
     <p class="lead" style="color:var(--on-dark-muted)">The Standard edition is free. A Pro licence key switches on the Pro features.</p>
     <p><a class="btn big" href="https://github.com/ahmed-hamouda-code/anvil/releases/latest/download/Anvil-windows-x64.zip">Download for Windows</a></p>
-    <p class="small">Version 1.1.0 · Windows 10/11 · 64-bit · free Standard edition · <a href="https://github.com/ahmed-hamouda-code/anvil/releases">All versions and release notes</a></p>
+    <p class="small">Version 1.2.0 · Windows 10/11 · 64-bit · free Standard edition · <a href="https://github.com/ahmed-hamouda-code/anvil/releases">All versions and release notes</a></p>
     <div class="dl-grid">
       <div class="card">
         <h3>Requirements</h3>
