@@ -49,6 +49,12 @@
   --line:#8fd3b8;
 }
 *{box-sizing:border-box}
+.skip{position:absolute;left:16px;top:-60px;z-index:100;background:var(--emerald);color:#06241a;font-weight:700;padding:10px 16px;border-radius:10px;text-decoration:none}
+.skip:focus{top:12px}
+.tour-text{margin-top:14px;font-size:.95rem;color:var(--muted)}
+.tour-text summary{cursor:pointer;color:var(--green);font-weight:600}
+.tour-text ol{margin:12px 0 0;padding-left:22px}
+.tour-text li{margin:6px 0}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;line-height:1.6;font-size:17px;-webkit-text-size-adjust:100%}
 img,video,svg{max-width:100%;height:auto}
@@ -218,9 +224,10 @@ figure.wide{grid-column:1/-1}
 video{display:block;width:100%;border-radius:14px;background:#000;box-shadow:var(--shadow);margin-top:28px}
 
 /* news + download */
-.news{margin:24px 0 0;padding:0;list-style:none;display:grid;gap:12px}
-.news li{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--green);border-radius:10px;padding:14px 18px;color:var(--muted)}
-.news strong{color:var(--text)}
+.news{margin:24px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px 40px}
+.news li{position:relative;padding:12px 0 12px 30px;border-bottom:1px solid var(--border);color:var(--muted);font-size:.97rem}
+.news li::before{content:"";position:absolute;left:2px;top:1.15em;width:14px;height:8px;border-left:2.5px solid var(--green);border-bottom:2.5px solid var(--green);transform:rotate(-45deg)}
+.news strong{display:block;color:var(--text)}
 .dl-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;margin-top:28px}
 .dl-grid h3{margin-bottom:10px}
 .dl-grid ul{padding-left:20px;margin:0}
@@ -243,7 +250,7 @@ footer a{color:var(--emerald)}
   .dark nav a{padding:10px 12px;min-height:44px;display:flex;align-items:center}
   html{scroll-padding-top:124px}
   .steps,.feat{grid-template-columns:1fr 1fr}
-  .promise-grid,.ed,.dl-grid,.howpro ol{grid-template-columns:1fr}
+  .promise-grid,.ed,.dl-grid,.howpro ol,.news{grid-template-columns:1fr}
 }
 @media (max-width:620px){
   section{padding:52px 0}
@@ -258,6 +265,7 @@ footer a{color:var(--emerald)}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="site dark">
   <div class="wrap bar">
@@ -279,6 +287,7 @@ footer a{color:var(--emerald)}
 </header>
 
 <main id="top">
+<span id="main" tabindex="-1"></span>
 <section class="hero dark" aria-labelledby="h-hero">
   <div class="wrap hero-grid">
     <div>
@@ -468,10 +477,22 @@ footer a{color:var(--emerald)}
       </figure>
     </div>
     <h3 style="margin-top:48px">Watch the tour</h3>
-    <video controls preload="none" poster="assets/guide-window.png" width="1920" height="1080">
+    <video controls preload="none" poster="assets/guide-window.png" width="1920" height="1080" aria-describedby="tour-text">
       <source src="assets/Anvil-promo.mp4" type="video/mp4">
       Your browser does not play this video. <a href="assets/Anvil-promo.mp4">Download the video</a>.
     </video>
+    <details class="tour-text" id="tour-text">
+      <summary>The tour has no sound. Read what it shows</summary>
+      <ol>
+        <li>Oracle EBS custom code lives everywhere: packages, views and grants in the database; programs, value sets and templates moved by loader files; deploys by hand, and no one sure UAT still matches DEV.</li>
+        <li>Anvil is one program on your PC, with a window and a command line. Your code sits in folders, item by item, and there is no server to install.</li>
+        <li>Six steps to a verified deploy: a workspace and its folders, your instances, extract the real objects, validate against your rules, generate the script and run it, register the log.</li>
+        <li>The real objects, read-only: one SELECT at a time, definitions through DBMS_METADATA, programs and templates by a script you can run on the server when you ask.</li>
+        <li>Anvil writes the script: objects deploy in dependency order, a script for UAT stops on DEV before any change, care during an online patching cycle, and a restore script beside every deploy.</li>
+        <li>Many items, one move: a release package in a suggested order, a change summary for the approver, Mass Items and Mass DB objects.</li>
+        <li>Safe by design. Anvil prepares and checks; you stay in control. Windows, Standard and Pro, Oracle EBS R12.2.</li>
+      </ol>
+    </details>
   </div>
 </section>
 
@@ -480,13 +501,13 @@ footer a{color:var(--emerald)}
     <span class="eyebrow">What's new</span>
     <h2 id="h-new">What's new in 1.2</h2>
     <ul class="news">
-      <li><strong>Clearer windows.</strong> New item is a plain form, Instances has separate Database and Apps server tabs, and every dialog has a heading and buttons that say what they do.</li>
-      <li><strong>Passwords where you work.</strong> Instances shows whether a password is stored on this PC and lets you change or forget it. Save and test saves first, then tests.</li>
-      <li><strong>APEX applications.</strong> Add an exported APEX application to an Item. Anvil keeps it, checks it and lists it as a step you install by hand in the release package.</li>
-      <li><strong>Reports run by a PL/SQL procedure.</strong> Adding such a program brings its package, data definition and every template, and the Item extracts and deploys them in the right order.</li>
-      <li><strong>Objects used by reports on a whole Folder (Pro).</strong> Scan every Item of a Folder at once, with your own database and application prefixes.</li>
-      <li><strong>Fast on large workspaces.</strong> Refreshing takes a moment with 1,000 Items, Mass Items lists thousands of objects at once, and checks and Extract need fewer trips to the database.</li>
-      <li><strong>Safer to use.</strong> No crash when Anvil closes, closing a window waits for its work, and a lost connection or a refused login stops a run cleanly.</li>
+      <li><strong>Clearer windows</strong>Plain forms, clear tabs, and buttons that say what they do.</li>
+      <li><strong>Passwords where you work</strong>See, change or forget a stored password in Instances.</li>
+      <li><strong>APEX applications</strong>Keep an exported APEX application in an Item, listed as a step you install by hand.</li>
+      <li><strong>Reports run by a PL/SQL procedure</strong>Its package, data definition and templates come along, in deploy order.</li>
+      <li><strong>Objects used by reports, whole Folder (Pro)</strong>Scan every Item of a Folder at once.</li>
+      <li><strong>Fast on large workspaces</strong>A refresh takes a moment, even with 1,000 Items.</li>
+      <li><strong>Safer to use</strong>No crash on close, and a lost connection stops a run cleanly.</li>
     </ul>
     <p class="note"><a href="https://github.com/ahmed-hamouda-code/anvil/releases">Read the full release notes</a></p>
   </div>
