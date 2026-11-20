@@ -56,7 +56,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-text-size-adjust:100%}
-img,video{max-width:100%;height:auto;display:block}
+img{max-width:100%;height:auto;display:block}
 a{color:var(--green);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
 a:hover{color:var(--green-ink);text-decoration-thickness:2px}
 :focus-visible{outline:2px solid var(--green);outline-offset:3px}
@@ -82,7 +82,6 @@ nav a:hover{color:var(--ink);border-bottom-color:var(--rule)}
 body:has(#how:target) nav a[href="#how"],
 body:has(#features:target) nav a[href="#features"],
 body:has(#editions:target) nav a[href="#editions"],
-body:has(#screenshots:target) nav a[href="#screenshots"],
 body:has(#support:target) nav a[href="#support"]{color:var(--ink);border-bottom-color:var(--green)}
 a.get{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;font-size:.95rem;padding:8px 14px;border-radius:3px;white-space:nowrap}
 a.get:hover{background:#000;color:#fff}
@@ -168,21 +167,6 @@ ol.how li::before{content:counter(h);font-family:var(--mono);color:var(--muted)}
 ol.how b{display:block;font-weight:600}
 ol.how span{color:var(--ink-2)}
 
-/* screenshots */
-.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 28px}
-figure{margin:0}
-figure a.crop{display:block;border:1px solid var(--ink);background:#fff;aspect-ratio:16/10;overflow:hidden}
-figure a.crop img{width:160%;max-width:none;height:auto}
-figure a.crop:hover{outline:2px solid var(--green);outline-offset:2px}
-figcaption{font-size:.92rem;color:var(--ink-2);margin-top:10px;max-width:65ch}
-figcaption .full{font-family:var(--mono);font-size:.8rem;margin-left:6px}
-figure.wide{grid-column:1/-1}
-figure.wide h3{margin-bottom:12px}
-video{width:100%;background:#000;border:1px solid var(--ink)}
-.tour-text{margin-top:12px;font-size:.95rem;color:var(--ink-2)}
-.tour-text summary{cursor:pointer;color:var(--green)}
-.tour-text ol{margin:12px 0 0;padding-left:22px;max-width:75ch}
-.tour-text li{margin:6px 0}
 
 /* what's new */
 dl.news{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 40px;margin:0;border-top:1px solid var(--rule-strong)}
@@ -235,7 +219,7 @@ footer .ver{font-family:var(--mono);font-size:.82rem}
   nav{margin:0 -16px;width:calc(100% + 32px)}
   section{padding:52px 0}
   .hero{padding-top:40px}
-  .steps,.gallery,dl.news,.rules{grid-template-columns:minmax(0,1fr)}
+  .steps,dl.news,.rules{grid-template-columns:minmax(0,1fr)}
   .sup li{grid-template-columns:1fr}
   .actions a.btn{display:block;width:100%;text-align:center}
   .file pre{white-space:pre;overflow-wrap:normal;-webkit-mask-image:linear-gradient(to right,#000 82%,transparent);mask-image:linear-gradient(to right,#000 82%,transparent)}
@@ -271,7 +255,6 @@ footer .ver{font-family:var(--mono);font-size:.82rem}
         <li><a href="#how">How it works</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#editions">Pro</a></li>
-        <li><a href="#screenshots">Screenshots</a></li>
         <li><a href="#support">Support</a></li>
       </ul>
     </nav>
@@ -457,52 +440,9 @@ To undo this deploy: bash _generated/restore.sh backup/20261109_091502</pre>
   </div>
 </section>
 
-<section id="screenshots" class="band" aria-labelledby="h-shots">
-  <div class="wrap">
-    <div class="sec-head"><span class="n">5</span><h2 id="h-shots">Screenshots</h2><p>All screenshots use demo data. Each shows the part that matters; open one for the whole window.</p></div>
-    <div class="gallery">
-      <figure>
-        <a class="crop" href="assets/guide-instances.png" target="_blank" rel="noopener"><img src="assets/guide-instances.png" width="1650" height="1020" loading="lazy" style="margin-left:-36%" alt="The Instances window with the list of instances and their connection settings"></a>
-        <figcaption>Instances: define a database and apps server once, test the connection, share it across workspaces.<a class="full" href="assets/guide-instances.png" target="_blank" rel="noopener">full window</a></figcaption>
-      </figure>
-      <figure>
-        <a class="crop" href="assets/guide-item-editor.png" target="_blank" rel="noopener"><img src="assets/guide-item-editor.png" width="1500" height="930" loading="lazy" alt="The item editor listing a report Item's objects: packages, views, a table and a function"></a>
-        <figcaption>The item editor: every object an Item holds, with the state of its file.<a class="full" href="assets/guide-item-editor.png" target="_blank" rel="noopener">full window</a></figcaption>
-      </figure>
-      <figure>
-        <a class="crop" href="assets/guide-mass-items.png" target="_blank" rel="noopener"><img src="assets/guide-mass-items.png" width="1500" height="960" loading="lazy" alt="The Mass Items window with its three steps: Find, Pick and Create"></a>
-        <figcaption>Mass Items (Pro): find programs on an instance, tick the ones you want and create Items in one go.<a class="full" href="assets/guide-mass-items.png" target="_blank" rel="noopener">full window</a></figcaption>
-      </figure>
-      <figure>
-        <a class="crop" href="assets/guide-release.png" target="_blank" rel="noopener"><img src="assets/guide-release.png" width="1350" height="960" loading="lazy" alt="The Release package window for bundling Items into one release"></a>
-        <figcaption>Release package (Pro): bundle several Items into one release that runs in your order.<a class="full" href="assets/guide-release.png" target="_blank" rel="noopener">full window</a></figcaption>
-      </figure>
-      <figure class="wide">
-        <h3>The tour, 58 seconds</h3>
-        <video controls preload="none" poster="assets/guide-window.png" width="1920" height="1080" aria-describedby="tour-text">
-          <source src="assets/Anvil-promo.mp4" type="video/mp4">
-          Your browser does not play this video. <a href="assets/Anvil-promo.mp4">Download the video</a>.
-        </video>
-        <details class="tour-text" id="tour-text">
-          <summary>The tour has no sound. Read what it shows</summary>
-          <ol>
-            <li>Oracle EBS custom code lives everywhere: packages, views and grants in the database; programs, value sets and templates moved by loader files; deploys by hand, and no one sure UAT still matches DEV.</li>
-            <li>Anvil is one program on your PC, with a window and a command line. Your code sits in folders, item by item, and there is no server to install.</li>
-            <li>Six steps to a verified deploy: a workspace and its folders, your instances, extract the real objects, validate against your rules, generate the script and run it, register the log.</li>
-            <li>The real objects, read-only: one SELECT at a time, definitions through DBMS_METADATA, programs and templates by a script you can run on the server when you ask.</li>
-            <li>Anvil writes the script: objects deploy in dependency order, a script for UAT stops on DEV before any change, care during an online patching cycle, and a restore script beside every deploy.</li>
-            <li>Many items, one move: a release package in a suggested order, a change summary for the approver, Mass Items and Mass DB objects.</li>
-            <li>Safe by design. Anvil prepares and checks; you stay in control. Windows, Standard and Pro, Oracle EBS R12.2.</li>
-          </ol>
-        </details>
-      </figure>
-    </div>
-  </div>
-</section>
-
 <section id="news" aria-labelledby="h-new">
   <div class="wrap">
-    <div class="sec-head"><span class="n">6</span><h2 id="h-new">What's new in 1.3</h2><p class="mono small muted">Released 20 November 2026</p></div>
+    <div class="sec-head"><span class="n">5</span><h2 id="h-new">What's new in 1.3</h2><p class="mono small muted">Released 20 November 2026</p></div>
     <dl class="news">
       <div><dt>Git in the window (Pro)</dt><dd>See changed files by Item, get a suggested commit message, view the commit graph and tag what you deployed.</dd></div>
       <div><dt>Arabic copies of application objects</dt><dd>Extract brings back the Arabic copy of programs, lookups and messages, and the deploy loads it after the base.</dd></div>
@@ -517,7 +457,7 @@ To undo this deploy: bash _generated/restore.sh backup/20261109_091502</pre>
 
 <section id="download" class="night" aria-labelledby="h-dl">
   <div class="wrap">
-    <div class="sec-head"><span class="n">7</span><h2 id="h-dl">Download</h2><p>The Standard edition is free. A Pro licence key switches on the Pro features.</p></div>
+    <div class="sec-head"><span class="n">6</span><h2 id="h-dl">Download</h2><p>The Standard edition is free. A Pro licence key switches on the Pro features.</p></div>
     <div class="dl">
       <div>
         <p><a class="btn" href="https://github.com/ahmed-hamouda-code/anvil/releases/latest/download/Anvil-windows-x64.zip">Download Anvil 1.3.0 for Windows</a></p>
@@ -541,7 +481,7 @@ To undo this deploy: bash _generated/restore.sh backup/20261109_091502</pre>
 
 <section id="support" aria-labelledby="h-sup">
   <div class="wrap">
-    <div class="sec-head"><span class="n">8</span><h2 id="h-sup">Support</h2><p>Pick what fits and fill in a short form. No account needed: it goes straight to us, and we reply by email.</p></div>
+    <div class="sec-head"><span class="n">7</span><h2 id="h-sup">Support</h2><p>Pick what fits and fill in a short form. No account needed: it goes straight to us, and we reply by email.</p></div>
     <ul class="sup">
       <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdstbxkSgzAubjrACNrmYvHxTMHOFmyQL8WIcobyDbWcVDIrQ/viewform?usp=pp_url&amp;entry.1759175395=Report+a+problem" target="_blank" rel="noopener">Report a problem</a><span>Something does not work as it should. Tell us the version, what you did and what happened.</span></li>
       <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdstbxkSgzAubjrACNrmYvHxTMHOFmyQL8WIcobyDbWcVDIrQ/viewform?usp=pp_url&amp;entry.1759175395=Suggest+a+feature" target="_blank" rel="noopener">Suggest a feature</a><span>An idea that would make your EBS work easier. Describe the task behind it.</span></li>

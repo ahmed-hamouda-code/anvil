@@ -4,7 +4,7 @@ This repository holds the public download page for **Anvil**, a Windows program 
 
 https://ahmed-hamouda-code.github.io/anvil/
 
-The program's source lives in a private repository; nothing from it is here except the screenshots, the promo video and the logo.
+The program's source lives in a private repository; nothing from it is here except the main window screenshot, the terms of use and the logo.
 
 ## Publish the site
 
