@@ -1,0 +1,48 @@
+Anvil terms of use
+==================
+
+These terms apply to everyone who installs or uses Anvil ("the program"), supplied by
+Ahmed Hamouda ("we"). By installing or using the program you accept them.
+
+1. Licence
+   You may install and use the program on any number of computers within your own
+   organisation. The Standard edition needs no licence file. The Pro edition needs a licence
+   file issued to you; it is valid until the date it states and only for the organisation it
+   names.
+
+2. Your systems
+   The program reads your Oracle E-Business Suite databases and generates scripts; it never
+   runs a deploy script. You decide whether to run a generated script, you review it first,
+   and you run it on your own systems at your own risk. Keep backups and test on a
+   non-production instance before production.
+
+3. No warranty
+   The program is provided "as is", without warranty of any kind, express or implied,
+   including fitness for a particular purpose, and without any promise that it is free of
+   errors.
+
+4. Limit of liability
+   To the extent the law allows, we are not liable for any indirect or consequential loss,
+   lost data or downtime, and our total liability is limited to the fees you paid us for the
+   program in the twelve months before the claim (nothing for the Standard edition).
+
+5. Restrictions
+   You may not sell, rent or pass on the program as your own, share a licence file outside
+   your organisation, alter a licence file, or reverse engineer, decompile or change the
+   program, except where the law allows it regardless of these terms.
+
+6. Your data
+   The program sends nothing to us or to anyone else. It connects only to the databases and
+   servers you set up, keeps passwords in Windows Credential Manager, and looks for a newer
+   version only when you ask it to.
+
+7. Ownership
+   The program and its documentation remain ours. These terms give you a right to use it,
+   not ownership of it.
+
+8. Ending
+   Your right to use the program ends if you break these terms; then remove it. A Pro
+   licence also ends on its expiry date, after which the program continues as Standard.
+
+9. Changes
+   A later version of the program may come with new terms; they apply to that version.
